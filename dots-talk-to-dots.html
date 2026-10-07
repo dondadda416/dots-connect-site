@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2E3192" />
+  <title>Talk to DOTS — Tell us what you’re planning</title>
+  <meta name="description" content="Tell DOTS about the meeting, event, or vote you are planning. Get a practical recommendation from people who support unions, associations, and member organizations." />
+  <link rel="canonical" href="https://dots-connect-site3.vercel.app/talk-to-dots" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="DOTS" />
+  <meta property="og:title" content="Talk to DOTS | Plan with confidence" />
+  <meta property="og:description" content="Tell us what you are planning and get a practical recommendation from the DOTS team." />
+  <meta property="og:url" content="https://dots-connect-site3.vercel.app/talk-to-dots" />
+  <meta property="og:image" content="https://dots-connect-site3.vercel.app/dots-devices2.png" />
+  <meta property="og:image:alt" content="DOTS Connect supporting a live meeting and secure vote on a laptop." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Talk to DOTS | Plan with confidence" />
+  <meta name="twitter:description" content="Tell us what you are planning and get a practical recommendation from the DOTS team." />
+  <meta name="twitter:image" content="https://dots-connect-site3.vercel.app/dots-devices2.png" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-QkNLfy0_YkfaKz_PoU41A.js"></script>
+  <script>
+    window.plausible = window.plausible || function () { (plausible.q = plausible.q || []).push(arguments); };
+    plausible.init = plausible.init || function (options) { plausible.o = options || {}; };
+    plausible.init();
+  </script>
+  <style>
+    /* ============================================================
+       DOTS — Design tokens (Living Design Specification, Ch.10)
+       ============================================================ */
+    :root {
+      /* Colour system — exact hex + variable names from the spec */
+      --navy:   #2E3192;   /* DOTS corporate blue — recognition, action, brand */
+      --navy-2: #23266F;   /* Deeper blue — hover, emphasis */
+      --indigo: #5B5FCF;   /* Blue accent */
+      --peri:   #A3ADE8;   /* Soft blue */
+      --lav:    #F1F4FB;   /* Cool blue background — calm separation */
+      --lav-2:  #E5EAF7;   /* Cool blue background 2 */
+      --ink:    #1A1D33;   /* Primary text — readability, trust */
+      --muted:  #5B6075;   /* Secondary text */
+      --line:   #E2E5F2;   /* Hairline / border */
+      --green:  #1A7F37;   /* Success — functional only */
+      --red:    #D14343;   /* Alert — functional only */
+      --bg:     #FFFFFF;   /* Page background */
+
+      /* Native system font stack — no web fonts, per spec */
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+      /* Type scale (hierarchy via scale + spacing) */
+      --fs-display: clamp(2.2rem, 4.6vw, 3.4rem);
+      --fs-h2:      clamp(1.7rem, 3vw, 2.35rem);
+      --fs-h3:      1.25rem;
+      --fs-lead:    clamp(1.05rem, 1.4vw, 1.3rem);
+      --fs-body:    1.0625rem;
+      --fs-small:   0.9375rem;
+      --fs-eyebrow: 0.8125rem;
+
+      /* Spacing scale (8pt base) */
+      --s-1: 0.5rem;  --s-2: 0.75rem; --s-3: 1rem;   --s-4: 1.5rem;
+      --s-5: 2rem;    --s-6: 3rem;    --s-7: 4rem;    --s-8: 6rem;
+
+      --radius: 14px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 2px rgba(26,29,51,.05);
+      --shadow-md: 0 12px 30px -12px rgba(26,29,51,.18);
+      --maxw: 1120px;
+    }
+
+    /* ============================================================
+       Base
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      font-size: var(--fs-body);
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { line-height: 1.15; margin: 0; letter-spacing: -0.02em; }
+    p { margin: 0; }
+    a { color: var(--navy-2); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; }
+
+    .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--s-4); }
+    .section { padding-block: var(--s-8); }
+    .eyebrow {
+      font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--navy-2); margin-bottom: var(--s-2);
+    }
+    .lead { font-size: var(--fs-lead); color: var(--muted); line-height: 1.55; }
+
+    /* Accessible focus — visible for every interactive element */
+    a:focus-visible, button:focus-visible, .btn:focus-visible {
+      outline: 3px solid var(--indigo);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+    .skip {
+      position: absolute; left: -999px; top: 0; background: var(--navy); color: #fff;
+      padding: var(--s-2) var(--s-3); border-radius: 0 0 8px 0; z-index: 100;
+    }
+    .skip:focus { left: 0; }
+
+    /* ============================================================
+       Buttons / CTAs (spec: primary purple, secondary outline)
+       ============================================================ */
+    .btn {
+      display: inline-flex; align-items: center; gap: .5em;
+      font: inherit; font-size: var(--fs-body); font-weight: 600;
+      padding: .8em 1.4em; border-radius: 12px; cursor: pointer;
+      border: 1.5px solid transparent; transition: background .15s ease, border-color .15s ease, color .15s ease;
+      text-decoration: none; white-space: nowrap;
+    }
+    .btn--primary { background: var(--navy); color: #fff; }
+    .btn--primary:hover { background: var(--navy-2); text-decoration: none; }
+    .btn--secondary { background: #fff; color: var(--navy-2); border-color: var(--peri); }
+    .btn--secondary:hover { background: var(--lav); border-color: var(--navy); text-decoration: none; }
+    .btn--ghost { color: var(--navy-2); padding-inline: 0; }
+    .btn--ghost:hover { color: var(--navy); text-decoration: none; }
+    .btn--ghost .arrow { transition: transform .15s ease; }
+    .btn--ghost:hover .arrow { transform: translateX(3px); }
+
+    /* ============================================================
+       Header / navigation
+       ============================================================ */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(255,255,255,.9); backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { position: relative; display: flex; align-items: center; gap: var(--s-4); height: 60px; }
+    .brand { display: flex; align-items: center; gap: .35rem; font-weight: 800; font-size: 1.3rem; color: var(--ink); letter-spacing: -.03em; }
+    .brand-logo { display: block; width: 44px; height: auto; }
+    .brand:hover { text-decoration: none; }
+    .brand .dot { color: var(--navy); }
+    .brand .tag { font-size: .68rem; font-weight: 600; color: var(--muted); letter-spacing: .01em; white-space: nowrap; }
+    .nav-links { display: flex; align-items: center; gap: var(--s-4); margin-left: auto; list-style: none; padding: 0; margin-block: 0; }
+    .nav-links a { color: var(--ink); font-weight: 500; font-size: var(--fs-small); }
+    .nav-links a:hover { color: var(--navy-2); text-decoration: none; }
+    .nav-cta { display: flex; align-items: center; gap: var(--s-2); margin-left: var(--s-2); }
+    .nav-toggle { display: none; }
+
+    /* ============================================================
+       Section 1 — Hero
+       ============================================================ */
+    .hero-band {
+      background:
+        radial-gradient(120% 80% at 85% -10%, var(--lav-2) 0%, rgba(227,225,247,0) 60%),
+        linear-gradient(180deg, var(--lav) 0%, #fff 78%);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero { padding-top: var(--s-6); padding-bottom: var(--s-7); }
+    .hero .eyebrow { margin-bottom: var(--s-2); }
+    .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: var(--s-6); align-items: center; }
+    .hero h1 { font-size: var(--fs-display); margin-bottom: var(--s-3); }
+    .hero .lead { margin-bottom: var(--s-4); max-width: 34ch; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-bottom: var(--s-4); }
+    .proof-line { font-size: var(--fs-small); color: var(--muted); border-left: 3px solid var(--peri); padding-left: var(--s-3); max-width: 46ch; }
+
+    /* Hero product shot — white panel so the white-bg screenshot reads on lavender */
+    .hero-shot { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s-3); box-shadow: var(--shadow-md); }
+    .hero-shot img { width: 100%; height: auto; border-radius: 10px; display: block; }
+
+    /* ---- Product-forward mock: member portal ---- */
+    .portal {
+      background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md); overflow: hidden;
+    }
+    .portal-bar { display: flex; align-items: center; gap: .4rem; padding: .7rem .9rem; background: var(--lav); border-bottom: 1px solid var(--line); }
+    .portal-bar .dots { display: flex; gap: .32rem; }
+    .portal-bar .dots i { width: 10px; height: 10px; border-radius: 50%; background: var(--peri); display: block; }
+    .portal-bar .url { margin-left: .5rem; font-size: .72rem; color: var(--muted); background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: .15rem .55rem; }
+    .portal-head { padding: var(--s-3) var(--s-4) 0; }
+    .portal-head .org { font-size: .78rem; color: var(--muted); }
+    .portal-head h3 { font-size: 1.05rem; margin-top: .1rem; }
+    .portal-list { padding: var(--s-3) var(--s-4) var(--s-4); display: grid; gap: .6rem; }
+    .event {
+      display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .8rem;
+      padding: .7rem .8rem; border: 1px solid var(--line); border-radius: 10px; background: #fff;
+    }
+    .event .ico { width: 34px; height: 34px; border-radius: 8px; background: var(--lav-2); display: grid; place-items: center; font-size: 1rem; }
+    .event .t { font-weight: 600; font-size: .9rem; }
+    .event .s { font-size: .75rem; color: var(--muted); }
+    .pill { font-size: .68rem; font-weight: 700; padding: .2rem .55rem; border-radius: 999px; letter-spacing: .02em; }
+    .pill--live { background: #fde8e8; color: var(--red); }
+    .pill--open { background: var(--lav); color: var(--navy-2); }
+    .pill--done { background: #e6f4ea; color: var(--green); }
+    .pill--soon { background: #eef0f6; color: var(--muted); }
+
+    /* ============================================================
+       Section 2 — Pathway cards
+       ============================================================ */
+    .pathways { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+    .card {
+      background: #fff; border: 1px solid var(--line); border-radius: var(--radius);
+      padding: var(--s-4); display: flex; flex-direction: column; gap: var(--s-2);
+      box-shadow: var(--shadow-sm); transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+    }
+    .path-card:hover { border-color: var(--peri); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .card .ico-lg { width: 44px; height: 44px; border-radius: 11px; background: var(--lav); color: var(--navy-2); display: grid; place-items: center; font-size: 1.35rem; }
+    .card h3 { font-size: var(--fs-h3); }
+    .card p { color: var(--muted); font-size: var(--fs-small); flex: 1; }
+    .card .btn--ghost { margin-top: var(--s-1); font-weight: 600; font-size: var(--fs-small); }
+
+    /* ============================================================
+       Section 3 — Trust (calm lavender band, prose)
+       ============================================================ */
+    .band-lav { background: var(--lav); }
+    .trust { max-width: 60ch; margin-inline: auto; text-align: center; }
+    .trust h2 { font-size: var(--fs-h2); margin-bottom: var(--s-4); }
+    .trust p { font-size: var(--fs-lead); color: var(--muted); line-height: 1.6; }
+
+    /* ============================================================
+       Section 4 — Proof
+       ============================================================ */
+    .proof-head { text-align: center; margin-bottom: var(--s-6); }
+    .proof-head h2 { font-size: var(--fs-h2); }
+    .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); }
+    .proof-block { text-align: center; padding: var(--s-4) var(--s-2); }
+    .proof-block .n { font-size: 2rem; font-weight: 800; color: var(--navy); letter-spacing: -.03em; }
+    .proof-block .n span { font-size: 1.1rem; }
+    .proof-block .l { font-weight: 600; margin-top: .2rem; }
+    .proof-block .d { font-size: var(--fs-small); color: var(--muted); margin-top: .2rem; }
+    .logos { margin-top: var(--s-6); border-top: 1px solid var(--line); padding-top: var(--s-5); }
+    .logos .cap { text-align: center; font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--s-4); }
+    .logo-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: var(--s-3) var(--s-6); }
+    .logo-row { gap: var(--s-4) var(--s-7); }
+    .logo-row img { height: 40px; width: auto; opacity: .85; transition: opacity .15s ease; }
+    .logo-row img:hover { opacity: 1; }
+
+    /* ============================================================
+       Section 5 — Product flow
+       ============================================================ */
+    .flow-head { text-align: center; margin-bottom: var(--s-6); }
+    .flow-head h2 { font-size: var(--fs-h2); }
+    .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--s-2); align-items: stretch; }
+    .step { position: relative; display: flex; flex-direction: column; }
+    .step .mock {
+      background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: var(--shadow-sm);
+      padding: .8rem; height: 118px; display: flex; flex-direction: column; gap: .4rem; overflow: hidden;
+    }
+    .step .caption { margin-top: .7rem; text-align: center; }
+    .step .caption b { display: block; font-size: var(--fs-small); }
+    .step .caption span { font-size: .78rem; color: var(--muted); }
+    .step .num { position: absolute; top: -10px; left: -6px; width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: #fff; font-size: .72rem; font-weight: 700; display: grid; place-items: center; z-index: 2; }
+    /* mini UI bits inside steps */
+    .mk-line { height: 8px; border-radius: 4px; background: var(--lav-2); }
+    .mk-line.sm { width: 60%; }
+    .mk-line.md { width: 80%; }
+    .mk-chip { font-size: .62rem; font-weight: 700; padding: .12rem .4rem; border-radius: 999px; align-self: flex-start; }
+    .mk-btn { margin-top: auto; font-size: .68rem; font-weight: 700; color: #fff; background: var(--navy); border-radius: 6px; text-align: center; padding: .3rem; }
+    .mk-bar { display: flex; align-items: flex-end; gap: 4px; height: 42px; }
+    .mk-bar i { display: block; width: 100%; background: var(--peri); border-radius: 3px 3px 0 0; }
+    .mk-bar i.hi { background: var(--navy); }
+    .mk-row { display: flex; align-items: center; gap: .35rem; font-size: .64rem; color: var(--muted); }
+    .mk-row .k { width: 10px; height: 10px; border-radius: 3px; background: var(--lav-2); }
+    .flow-goal { text-align: center; margin-top: var(--s-5); font-style: italic; color: var(--navy-2); font-size: var(--fs-lead); }
+
+    /* ============================================================
+       Section 6 — Use cases
+       ============================================================ */
+    .uc-head { max-width: 46ch; margin-bottom: var(--s-5); }
+    .uc-head h2 { font-size: var(--fs-h2); }
+    .uc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-2) var(--s-3); }
+    .uc {
+      display: flex; align-items: center; gap: .6rem; padding: .85rem 1rem;
+      border: 1px solid var(--line); border-radius: 10px; font-weight: 500; font-size: var(--fs-small);
+      background: #fff; transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    }
+    .uc:hover { border-color: var(--peri); background: var(--lav); transform: translateY(-1px); }
+    .uc::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--indigo); flex: none; }
+
+    /* ============================================================
+       Section 7 — DOTS Connect
+       ============================================================ */
+    .connect { background: var(--ink); color: #fff; border-radius: var(--radius-lg); padding: var(--s-7); }
+    .connect-head { max-width: 58ch; margin: 0 auto var(--s-6); text-align: center; }
+    .connect .eyebrow { color: var(--peri); }
+    .connect h2 { font-size: var(--fs-h2); color: #fff; margin-bottom: var(--s-3); }
+    .connect p { color: #c9cbe0; font-size: var(--fs-lead); }
+    .connect .support { margin-top: var(--s-4); font-weight: 600; color: #fff; }
+    .connect-phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); align-items: start; }
+    .connect-phones figure { margin: 0; }
+    .connect-phones img { width: 100%; height: auto; display: block; background: #fff; border-radius: 16px; box-shadow: 0 24px 48px -20px rgba(0,0,0,.55); }
+    .connect-phones figcaption { margin-top: var(--s-3); text-align: center; font-size: var(--fs-small); color: var(--peri); font-weight: 600; }
+
+    /* ============================================================
+       Section 8 — Final CTA
+       ============================================================ */
+    .final { text-align: center; }
+    .final h2 { font-size: var(--fs-h2); margin-bottom: var(--s-3); }
+    .final p { color: var(--muted); font-size: var(--fs-lead); max-width: 48ch; margin: 0 auto var(--s-5); }
+    .final .hero-actions { justify-content: center; }
+
+    /* ============================================================
+       Footer
+       ============================================================ */
+    .site-footer { border-top: 1px solid var(--line); padding-block: var(--s-6) var(--s-5); }
+    .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: var(--s-5); }
+    .foot-brand .brand { margin-bottom: var(--s-2); }
+    .foot-brand .corporate-logo { display: block; width: 120px; margin-bottom: var(--s-2); }
+    .foot-brand .corporate-logo img { display: block; width: 100%; height: auto; }
+    .foot-brand p { font-size: var(--fs-small); color: var(--muted); max-width: 34ch; }
+    .foot-col h4 { font-size: var(--fs-eyebrow); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: var(--s-2); }
+    .foot-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
+    .foot-col a { color: var(--ink); font-size: var(--fs-small); }
+    .foot-col a:hover { color: var(--navy-2); }
+    .foot-bottom { margin-top: var(--s-6); padding-top: var(--s-4); border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: var(--s-2); justify-content: space-between; font-size: var(--fs-small); color: var(--muted); }
+
+    /* ============================================================
+       Responsive
+       ============================================================ */
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .connect-grid { grid-template-columns: 1fr; }
+      .proof-grid { grid-template-columns: repeat(2, 1fr); }
+      .uc-grid { grid-template-columns: repeat(3, 1fr); }
+      .flow { grid-template-columns: repeat(2, 1fr); gap: var(--s-4); }
+      .foot-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .nav { gap: var(--s-2); }
+      .brand .tag { display: none; }
+      .nav-links, .nav-cta .btn--secondary { display: none; }
+      .nav-links.is-open {
+        position: absolute; z-index: 60; top: calc(100% + 8px); right: 0; left: 0;
+        display: flex; flex-direction: column; align-items: stretch; gap: 0;
+        padding: var(--s-2); border: 1px solid var(--line); border-radius: 8px;
+        background: #fff; box-shadow: 0 14px 30px rgba(25, 27, 53, .12);
+      }
+      .nav-links.is-open a { display: block; padding: .75rem .5rem; }
+      .nav-cta { margin-left: auto; }
+      .nav-cta .btn--primary { padding: .6em 1em; font-size: var(--fs-small); }
+      .nav-toggle {
+        display: inline-flex; background: var(--lav); border: 1px solid var(--line);
+        color: var(--navy-2); border-radius: 10px; padding: .5rem .7rem; font: inherit; font-weight: 600; font-size: var(--fs-small); cursor: pointer;
+      }
+    }
+    @media (max-width: 680px) {
+      :root { --s-8: 4rem; --s-7: 3rem; }
+      .nav { gap: var(--s-2); }
+      .brand .tag { display: none; }
+      .nav-links, .nav-cta .btn--secondary { display: none; }
+      .nav-links.is-open {
+        position: absolute; z-index: 60; top: calc(100% + 8px); right: 0; left: 0;
+        display: flex; flex-direction: column; align-items: stretch; gap: 0;
+        padding: var(--s-2); border: 1px solid var(--line); border-radius: 8px;
+        background: #fff; box-shadow: 0 14px 30px rgba(25, 27, 53, .12);
+      }
+      .nav-links.is-open a { display: block; padding: .75rem .5rem; }
+      .nav-cta { margin-left: auto; }
+      .nav-cta .btn--primary { padding: .6em 1em; font-size: var(--fs-small); }
+      .nav-toggle {
+        display: inline-flex; background: var(--lav); border: 1px solid var(--line);
+        color: var(--navy-2); border-radius: 10px; padding: .5rem .7rem; font: inherit; font-weight: 600; font-size: var(--fs-small); cursor: pointer;
+      }
+      .pathways { grid-template-columns: 1fr; }
+      .proof-grid { grid-template-columns: 1fr 1fr; }
+      .uc-grid { grid-template-columns: 1fr 1fr; }
+      .flow { grid-template-columns: 1fr; }
+      .connect-phones { grid-template-columns: 1fr; max-width: 300px; margin-inline: auto; }
+      .connect { padding: var(--s-5); }
+      .foot-grid { grid-template-columns: 1fr; }
+      .hero-actions .btn { flex: 1; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+
+    /* ============================================================
+       Electronic Voting page
+       ============================================================ */
+    .nav-links a[aria-current="page"] { color: var(--navy-2); font-weight: 700; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6); align-items: center; }
+    .split h2 { font-size: var(--fs-h2); margin-bottom: var(--s-3); }
+    .split .lead { margin-bottom: var(--s-4); }
+    .shot-phone { max-width: 300px; margin-inline: auto; }
+    .feature-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s-3); }
+    .feature-list li { position: relative; padding-left: 2rem; color: var(--muted); }
+    .feature-list li b { color: var(--ink); font-weight: 600; }
+    .feature-list li::before { content: "\2713"; position: absolute; left: 0; top: .15rem; width: 1.35rem; height: 1.35rem; background: var(--lav); color: var(--navy-2); font-size: .78rem; font-weight: 800; border-radius: 50%; display: grid; place-items: center; }
+    .results-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); }
+    .result { display: flex; flex-direction: column; gap: .15rem; padding: var(--s-4); background: #fff; border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); }
+    .result .c { width: 32px; height: 32px; border-radius: 9px; background: var(--lav); color: var(--navy-2); font-weight: 800; display: grid; place-items: center; margin-bottom: var(--s-2); }
+    .result b { font-weight: 600; }
+    .result .d { font-size: var(--fs-small); color: var(--muted); }
+    .testimonial { max-width: 60ch; margin: 0 auto var(--s-6); text-align: center; }
+    .testimonial p { font-size: var(--fs-lead); color: var(--ink); line-height: 1.5; }
+    .testimonial cite { display: block; margin-top: var(--s-3); font-style: normal; font-weight: 600; color: var(--muted); font-size: var(--fs-small); }
+    @media (max-width: 960px) {
+      .results-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 680px) {
+      .split { grid-template-columns: 1fr; gap: var(--s-4); }
+      .split--rev figure { order: -1; }
+      .results-row { grid-template-columns: 1fr; }
+    }
+
+    /* Meetings & Votes page */
+    .card .badge { display: inline-block; align-self: flex-start; font-size: var(--fs-eyebrow); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--navy-2); background: var(--lav); padding: .25rem .65rem; border-radius: 999px; }
+    .card .feature-list { margin-top: .25rem; }
+    .card .feature-list li { font-size: var(--fs-small); }
+    .media-center { max-width: 860px; margin: var(--s-5) auto 0; }
+
+    /* About page */
+    .hero-center { text-align: center; }
+    .hero-center h1 { max-width: 24ch; margin-inline: auto; font-size: var(--fs-display); }
+    .hero-center .lead { max-width: 60ch; margin: var(--s-3) auto 0; }
+    .hero-center .hero-actions { justify-content: center; margin-top: var(--s-4); }
+    .prose { max-width: 68ch; margin-inline: auto; }
+    .prose h2 { font-size: var(--fs-h2); margin-bottom: var(--s-4); }
+    .prose p { color: var(--muted); font-size: var(--fs-lead); line-height: 1.65; margin-bottom: var(--s-3); }
+    .prose p.lead-in { color: var(--ink); font-weight: 500; }
+
+    /* Talk to DOTS page */
+    .contact-grid { display: grid; grid-template-columns: .82fr 1.18fr; gap: var(--s-6); align-items: start; }
+    .contact-aside > .eyebrow { margin-top: 0; }
+    .contact-aside .feature-list { gap: var(--s-2); }
+    .contact-aside .feature-list li { color: var(--muted); }
+    .contact-alt { margin-top: var(--s-4); }
+    .contact-alt .eyebrow { margin-top: 0; }
+    .contact-alt p { margin-bottom: .3rem; }
+    .contact-alt a { font-weight: 600; font-size: var(--fs-lead); }
+    .reassure { margin-top: var(--s-4); padding: var(--s-3); background: var(--lav); border-radius: var(--radius); font-size: var(--fs-small); color: var(--muted); }
+    .form-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: var(--s-5); }
+    .form-intro { color: var(--muted); font-size: var(--fs-small); margin-bottom: var(--s-4); }
+    .field { margin-bottom: var(--s-4); }
+    .field:last-of-type { margin-bottom: 0; }
+    .field label { display: block; font-weight: 600; font-size: var(--fs-small); margin-bottom: .4rem; }
+    .field .opt { color: var(--muted); font-weight: 400; }
+    .field .req { color: var(--navy-2); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+    .form-card input, .form-card select, .form-card textarea {
+      width: 100%; font: inherit; font-size: var(--fs-body); color: var(--ink);
+      padding: .7rem .85rem; border: 1.5px solid var(--line); border-radius: 10px; background: #fff;
+    }
+    .form-card textarea { min-height: 110px; resize: vertical; }
+    .form-card input::placeholder, .form-card textarea::placeholder { color: #9aa1b6; }
+    .form-card :is(input, select, textarea):focus-visible {
+      outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px var(--lav-2);
+    }
+    .field.is-invalid label, .field.is-invalid .req { color: var(--red); }
+    .form-card .field.is-invalid :is(input, select, textarea) {
+      border-color: var(--red); box-shadow: 0 0 0 3px rgba(194, 69, 78, .12);
+    }
+    .form-actions { margin-top: var(--s-4); }
+    .form-actions .btn--primary { width: 100%; justify-content: center; font-size: var(--fs-lead); padding: .9em; }
+    .form-actions .btn--primary:disabled { cursor: wait; opacity: .72; }
+    .form-note { margin-top: var(--s-3); font-size: var(--fs-small); color: var(--muted); text-align: center; }
+    .form-error { margin-top: var(--s-3); color: var(--red); font-size: var(--fs-small); text-align: center; }
+    .honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+    .form-success { display: none; text-align: center; padding: var(--s-5) var(--s-3); }
+    .form-success .tick { width: 56px; height: 56px; border-radius: 50%; background: #e6f4ea; color: var(--green); font-size: 1.6rem; font-weight: 800; display: grid; place-items: center; margin: 0 auto var(--s-3); }
+    .form-success h3 { font-size: var(--fs-h3); margin-bottom: var(--s-2); }
+    .form-success p { color: var(--muted); max-width: 40ch; margin: 0 auto; }
+    @media (max-width: 860px) {
+      .contact-grid { grid-template-columns: 1fr; gap: var(--s-4); }
+    }
+    @media (max-width: 480px) {
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ===================== Header / Nav ===================== -->
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Primary">
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/dots-logo-full.png" alt="Data on the Spot">
+        <span class="tag">Meet · Vote · Engage</span>
+      </a>
+      <ul class="nav-links" id="site-navigation">
+        <li><a href="/electronic-voting">Electronic Voting</a></li>
+        <li><a href="/meetings-and-votes">Meetings &amp; Events</a></li>
+        <li><a href="/about">About DOTS</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn--secondary" href="/demo">See DOTS in Action</a>
+        <a class="btn btn--primary" href="/talk-to-dots" aria-current="page">Talk to DOTS</a>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">Menu</button>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ===================== 1 · Hero ===================== -->
+    <section class="hero-band" aria-labelledby="hero-h">
+      <div class="wrap section hero-center" style="padding-bottom: var(--s-6);">
+        <p class="eyebrow">Talk to DOTS</p>
+        <h1 id="hero-h">Tell us what you&rsquo;re planning.</h1>
+        <p class="lead">Tell us a little about the meeting, event, or vote you&rsquo;re planning. We&rsquo;ll help you choose a confident way to run it, with no pressure and no obligation.</p>
+      </div>
+    </section>
+
+    <!-- ===================== 2 · Contact + form ===================== -->
+    <section class="section wrap" style="padding-top: var(--s-6);" aria-labelledby="form-h">
+      <h2 id="form-h" class="visually-hidden" style="position:absolute;left:-9999px;">Contact DOTS</h2>
+      <div class="contact-grid">
+
+        <!-- Aside: reassurance -->
+        <aside class="contact-aside">
+          <p class="eyebrow">What happens next</p>
+          <ul class="feature-list">
+            <li><b>A real person reviews your plan</b> &mdash; not a bot, not a queue.</li>
+            <li><b>We reply within one business day</b> &mdash; with useful next steps, not a hard sell.</li>
+            <li><b>We recommend a fitting setup</b> &mdash; self-managed, supported, or fully run by our team.</li>
+          </ul>
+
+          <div class="contact-alt">
+            <p class="eyebrow">Prefer to talk now?</p>
+            <p><a href="tel:18333687123">1.833.368.7123</a></p>
+            <p><a href="mailto:sales@dataonthespot.com">sales@dataonthespot.com</a></p>
+          </div>
+
+          <p class="reassure">You do not need every detail yet. Share what you know, and we&rsquo;ll help you work out the rest from 16+ years of live meeting experience.</p>
+        </aside>
+
+        <!-- Form -->
+        <div class="form-card">
+          <form id="talk-form" novalidate>
+            <p class="form-intro">Share what you know. Fields marked <span class="req" aria-hidden="true">*</span> are required.</p>
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Website</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
+                <input id="name" name="name" type="text" autocomplete="name" required aria-required="true" placeholder="Your name" />
+              </div>
+              <div class="field">
+                <label for="org">Organization <span class="req" aria-hidden="true">*</span></label>
+                <input id="org" name="org" type="text" autocomplete="organization" required aria-required="true" placeholder="Union, association, or org" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" required aria-required="true" placeholder="you@organization.org" />
+              </div>
+              <div class="field">
+                <label for="phone">Phone <span class="opt">(optional)</span></label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Best number to reach you" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="type">What are you planning?</label>
+                <select id="type" name="type">
+                  <option value="" selected>Select one&hellip;</option>
+                  <option>AGM</option>
+                  <option>Convention</option>
+                  <option>Delegate meeting</option>
+                  <option>Board meeting</option>
+                  <option>Town hall</option>
+                  <option>Committee meeting</option>
+                  <option>Member event</option>
+                  <option>Strike vote</option>
+                  <option>Ratification vote</option>
+                  <option>Election</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="format">How will it run?</label>
+                <select id="format" name="format">
+                  <option value="" selected>Select one&hellip;</option>
+                  <option>In person</option>
+                  <option>Online</option>
+                  <option>Hybrid</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="date">When is it happening? <span class="opt">(optional)</span></label>
+                <input id="date" name="date" type="date" />
+              </div>
+              <div class="field">
+                <label for="participants">Expected attendance</label>
+                <select id="participants" name="participants">
+                  <option value="" selected>Select a range&hellip;</option>
+                  <option>Under 100</option>
+                  <option>100&ndash;500</option>
+                  <option>500&ndash;2,000</option>
+                  <option>2,000+</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="help">Anything we should know? <span class="opt">(optional)</span></label>
+              <textarea id="help" name="help" placeholder="A goal, a complication, or anything you need to get right."></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn--primary">Talk to DOTS</button>
+              <p class="form-error" id="form-error" role="alert" hidden></p>
+              <p class="form-note">We only ask what helps us respond usefully. Your details are never shared.</p>
+            </div>
+          </form>
+
+          <div class="form-success" id="form-success" role="status" aria-live="polite" tabindex="-1">
+            <div class="tick" aria-hidden="true">&#10003;</div>
+            <h3>Thanks &mdash; we&rsquo;ve got it.</h3>
+            <p>A real person will get back to you within one business day. If it&rsquo;s time-sensitive, call us at 1.833.368.7123.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== Footer ===================== -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="corporate-logo" href="/" aria-label="Data on the Spot"><img src="/dots-logo-full.png" alt="Data on the Spot"></a>
+          <p>A trusted place for unions, associations, and member-based organizations to meet, vote, and engage — self-serve when it makes sense, supported when it matters.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="/electronic-voting">Electronic Voting</a></li>
+            <li><a href="/meetings-and-votes">Meetings &amp; Events</a></li>
+            <li><a href="/demo">See DOTS in Action</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/about">About DOTS</a></li>
+            <li><a href="/talk-to-dots">Talk to DOTS</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:18333687123">1.833.368.7123</a></li>
+            <li><a href="mailto:sales@dataonthespot.com">sales@dataonthespot.com</a></li>
+            <li>65 Overlea Blvd, East York, ON</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 Data On The Spot Inc. All rights reserved.</span>
+        <span>Built in real meetings. Ready when it matters.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Minimal, progressive: mobile menu toggle reveals the nav links inline.
+    (function () {
+      var toggle = document.querySelector('.nav-toggle');
+      var links = document.querySelector('.nav-links');
+      if (!toggle || !links) return;
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        links.classList.toggle('is-open', !open);
+        toggle.setAttribute('aria-expanded', String(!open));
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      var form = document.getElementById('talk-form');
+      var success = document.getElementById('form-success');
+      var error = document.getElementById('form-error');
+      var submit = form && form.querySelector('button[type="submit"]');
+      if (!form) return;
+      form.addEventListener('invalid', function (e) {
+        var field = e.target.closest('.field');
+        if (field) field.classList.add('is-invalid');
+        error.textContent = 'Please check the highlighted fields below.';
+        error.hidden = false;
+      }, true);
+      function clearFieldError(e) {
+        var field = e.target.closest('.field');
+        if (field && e.target.validity.valid) field.classList.remove('is-invalid');
+        if (!form.querySelector(':invalid')) error.hidden = true;
+      }
+      form.addEventListener('input', clearFieldError);
+      form.addEventListener('change', clearFieldError);
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+        error.hidden = true;
+        submit.disabled = true;
+        submit.textContent = 'Sending...';
+
+        try {
+          var formData = new FormData(form);
+          var response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(Object.fromEntries(formData))
+          });
+
+          if (!response.ok) throw new Error('Request failed');
+          if (typeof window.plausible === 'function') window.plausible('Inquiry Submitted');
+          form.style.display = 'none';
+          success.style.display = 'block';
+          success.focus();
+        } catch (err) {
+          error.textContent = 'We could not send your message just now. Please call us or email sales@dataonthespot.com.';
+          error.hidden = false;
+          submit.disabled = false;
+          submit.textContent = 'Talk to DOTS';
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      function track(eventName) {
+        if (typeof window.plausible === 'function') window.plausible(eventName);
+      }
+      document.addEventListener('click', function (event) {
+        var link = event.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (href === '/talk-to-dots') track('Talk to DOTS');
+        else if (href === '/demo') track('See DOTS in Action');
+        else if (href.indexOf('tel:') === 0) track('Phone Click');
+        else if (href.indexOf('mailto:') === 0) track('Email Click');
+      });
+    })();
+  </script>
+</body>
+</html>

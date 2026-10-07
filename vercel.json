@@ -1,0 +1,11 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/", "destination": "/dots-homepage.html" },
+    { "source": "/electronic-voting", "destination": "/dots-electronic-voting.html" },
+    { "source": "/meetings-and-votes", "destination": "/dots-meetings-and-votes.html" },
+    { "source": "/about", "destination": "/dots-about.html" },
+    { "source": "/talk-to-dots", "destination": "/dots-talk-to-dots.html" },
+    { "source": "/demo", "destination": "/demo.html" }
+  ]
+}

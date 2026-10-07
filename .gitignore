@@ -1,0 +1,11 @@
+.vercel
+.env*
+
+# Not part of the live site
+extracted/
+magic-template-source/
+*.zip
+HANDOFF.md
+README (1).md
+dots-site-mockup.html
+dots-upgraded-oldsite.html

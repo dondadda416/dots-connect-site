@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2E3192" />
+  <title>See DOTS in Action | DOTS Connect</title>
+  <meta name="description" content="Explore a guided DOTS Connect meeting with live voting, moderated Q&A, and a speaker queue for unions, associations, and member organizations." />
+  <link rel="canonical" href="https://dots-connect-site3.vercel.app/demo" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="DOTS" />
+  <meta property="og:title" content="See DOTS in Action | DOTS Connect" />
+  <meta property="og:description" content="Explore a guided DOTS Connect meeting with live voting, moderated Q&amp;A, and a speaker queue." />
+  <meta property="og:url" content="https://dots-connect-site3.vercel.app/demo" />
+  <meta property="og:image" content="https://dots-connect-site3.vercel.app/hero-devices.png" />
+  <meta property="og:image:alt" content="DOTS Connect supporting a live meeting, secure voting, and participation." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="See DOTS in Action | DOTS Connect" />
+  <meta name="twitter:description" content="Explore a guided DOTS Connect meeting with live voting, moderated Q&amp;A, and a speaker queue." />
+  <meta name="twitter:image" content="https://dots-connect-site3.vercel.app/hero-devices.png" />
+  <!-- Privacy-friendly analytics by Plausible -->
+  <script async src="https://plausible.io/js/pa-QkNLfy0_YkfaKz_PoU41A.js"></script>
+  <script>
+    window.plausible = window.plausible || function () { (plausible.q = plausible.q || []).push(arguments); };
+    plausible.init = plausible.init || function (options) { plausible.o = options || {}; };
+    plausible.init();
+  </script>
+  <style>
+    :root {
+      --navy: #2E3192;
+      --navy-2: #23266F;
+      --peri: #A3ADE8;
+      --lav: #F1F4FB;
+      --lav-2: #E5EAF7;
+      --ink: #1A1D33;
+      --muted: #5B6075;
+      --line: #E2E5F2;
+      --green: #17823B;
+      --green-bg: #E8F6EC;
+      --blue: #1464C8;
+      --blue-bg: #EAF3FF;
+      --orange: #B85E11;
+      --orange-bg: #FFF1E5;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --maxw: 1120px;
+      --s-1: .5rem; --s-2: .75rem; --s-3: 1rem; --s-4: 1.5rem;
+      --s-5: 2rem; --s-6: 3rem; --s-7: 4rem; --s-8: 6rem;
+      --fs-display: clamp(2.25rem, 4.7vw, 3.65rem);
+      --fs-h2: clamp(1.7rem, 3vw, 2.35rem);
+      --fs-lead: clamp(1.05rem, 1.4vw, 1.25rem);
+      --fs-small: .9375rem;
+      --radius: 8px;
+      --shadow: 0 16px 36px -20px rgba(26,29,51,.22);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { margin: 0; background: #fff; color: var(--ink); font: 1.0625rem/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { line-height: 1.15; letter-spacing: 0; }
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    img { display: block; max-width: 100%; }
+    .wrap { width: min(100%, var(--maxw)); margin: 0 auto; padding-inline: var(--s-4); }
+    .section { padding-block: var(--s-8); }
+    .eyebrow { margin-bottom: var(--s-2); color: var(--navy-2); font-size: .8125rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .lead { color: var(--muted); font-size: var(--fs-lead); line-height: 1.55; }
+    .skip { position: absolute; top: 0; left: -999px; z-index: 100; padding: var(--s-2) var(--s-3); border-radius: 0 0 8px 0; background: var(--navy); color: #fff; }
+    .skip:focus { left: 0; }
+    :focus-visible { outline: 3px solid var(--peri); outline-offset: 3px; }
+
+    .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.94); backdrop-filter: blur(12px); }
+    .nav { position: relative; display: flex; align-items: center; gap: var(--s-4); min-height: 60px; }
+    .brand { display: inline-flex; align-items: center; gap: .35rem; color: var(--ink); font-size: 1.3rem; font-weight: 800; }
+    .brand-logo { display: block; width: 44px; height: auto; }
+    .brand .dot { color: var(--navy); }
+    .brand .tag { color: var(--muted); font-size: .68rem; font-weight: 600; letter-spacing: 0; white-space: nowrap; }
+    .nav-links { display: flex; gap: var(--s-4); margin: 0 0 0 auto; padding: 0; list-style: none; }
+    .nav-links a { color: var(--ink); font-size: var(--fs-small); font-weight: 550; }
+    .nav-links a:hover { color: var(--navy-2); }
+    .nav-actions { display: flex; gap: var(--s-2); align-items: center; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: .65em 1em; border: 1px solid transparent; border-radius: 8px; font-weight: 700; white-space: nowrap; }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--navy-2); }
+    .btn-secondary { border-color: var(--peri); background: #fff; color: var(--navy-2); }
+    .btn-secondary:hover { border-color: var(--navy); background: var(--lav); }
+    .nav-toggle { display: none; min-height: 40px; padding: .45rem .7rem; border: 1px solid var(--line); border-radius: 8px; background: var(--lav); color: var(--navy-2); font-weight: 700; }
+
+    .hero-band { border-bottom: 1px solid var(--line); background: var(--lav); }
+    .hero { display: grid; grid-template-columns: 1fr .92fr; align-items: center; gap: var(--s-7); min-height: 500px; padding-block: var(--s-7); }
+    .hero-copy h1 { max-width: 13ch; font-size: var(--fs-display); }
+    .hero-copy .lead { max-width: 48ch; margin-top: var(--s-3); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-5); }
+    .hero-proof { margin-top: var(--s-4); color: var(--muted); font-size: var(--fs-small); }
+    .hero-media { align-self: end; }
+    .hero-media img { width: 100%; filter: drop-shadow(0 18px 26px rgba(26,29,51,.16)); }
+
+    .tour-head { max-width: 56ch; margin-bottom: var(--s-5); }
+    .tour-head h2 { font-size: var(--fs-h2); }
+    .tour-head .lead { margin-top: var(--s-3); }
+    .tour-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: .25rem; width: min(100%, 660px); margin-bottom: var(--s-5); padding: .25rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: var(--shadow); }
+    .tour-tab { min-height: 48px; padding: .6rem .85rem; border: 0; border-radius: 6px; background: transparent; color: var(--muted); font-size: var(--fs-small); font-weight: 750; }
+    .tour-tab[aria-selected="true"] { background: var(--navy); color: #fff; }
+    .demo-shell { overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: var(--shadow); }
+    .demo-banner { display: flex; justify-content: space-between; gap: var(--s-3); padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--line); background: #fbfbfe; color: var(--muted); font-size: var(--fs-small); }
+    .demo-banner strong { color: var(--ink); }
+    .demo-panel[hidden] { display: none; }
+    .demo-panel { display: grid; grid-template-columns: 1.15fr .85fr; min-height: 560px; }
+    .host { padding: var(--s-5); border-right: 1px solid var(--line); }
+    .member-side { display: grid; align-content: center; justify-items: center; padding: var(--s-5); background: #f8f8fc; }
+    .surface-label { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); margin-bottom: var(--s-4); color: var(--muted); font-size: var(--fs-small); }
+    .surface-label strong { color: var(--ink); font-size: 1rem; }
+    .live-dot { display: inline-flex; align-items: center; gap: .45rem; color: var(--green); font-weight: 700; }
+    .live-dot::before { width: .55rem; height: .55rem; border-radius: 50%; background: currentColor; content: ""; }
+    .console-title { margin-bottom: var(--s-4); }
+    .console-title h3 { font-size: 1.45rem; }
+    .console-title p { margin-top: .25rem; color: var(--muted); font-size: var(--fs-small); }
+    .meeting-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--s-3); padding: var(--s-4); border-top: 1px solid var(--line); }
+    .meeting-row:last-child { border-bottom: 1px solid var(--line); }
+    .meeting-row h4 { margin: 0; font-size: 1rem; }
+    .meeting-row p { margin: .2rem 0 0; color: var(--muted); font-size: var(--fs-small); }
+    .action { min-height: 38px; padding: .5em .8em; border: 1px solid var(--peri); border-radius: 6px; background: #fff; color: var(--navy-2); font-size: var(--fs-small); font-weight: 750; }
+    .action:hover { border-color: var(--navy); background: var(--lav); }
+    .action:disabled { cursor: not-allowed; opacity: .52; }
+    .admin-status { display: flex; align-items: center; gap: .5rem; min-height: 46px; margin-top: var(--s-4); padding: .7rem .85rem; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: var(--fs-small); }
+    .admin-status.is-live { border-color: #BDE6C7; background: var(--green-bg); color: var(--green); }
+    .admin-status.is-action { border-color: #BAD7FB; background: var(--blue-bg); color: var(--blue); }
+    .admin-status.is-queue { border-color: #F3D4B7; background: var(--orange-bg); color: var(--orange); }
+    .result-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-2); margin-top: var(--s-4); }
+    .result-summary div { padding: var(--s-3); border: 1px solid var(--line); border-radius: 6px; background: #fbfbfe; }
+    .result-summary span { display: block; color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
+    .result-summary strong { display: block; margin-top: .2rem; color: var(--ink); font-size: 1.25rem; }
+    .question-list, .queue-list { margin: 0; padding: 0; list-style: none; }
+    .question-list li, .queue-list li { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); padding: var(--s-3); border-top: 1px solid var(--line); color: var(--ink); font-size: var(--fs-small); }
+    .question-list li:last-child, .queue-list li:last-child { border-bottom: 1px solid var(--line); }
+    .pill { display: inline-flex; min-width: 2.1rem; justify-content: center; padding: .15rem .45rem; border-radius: 999px; background: var(--lav); color: var(--navy-2); font-size: .75rem; font-weight: 800; }
+    .empty { padding: var(--s-4); border: 1px dashed var(--line); border-radius: 6px; color: var(--muted); font-size: var(--fs-small); text-align: center; }
+
+    .phone { width: min(100%, 310px); overflow: hidden; border: 8px solid var(--ink); border-radius: 30px; background: #fff; box-shadow: 0 16px 34px -18px rgba(26,29,51,.36); }
+    .phone-top { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: .5rem .85rem; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
+    .phone-top strong { color: var(--ink); font-size: .78rem; }
+    .phone-body { min-height: 390px; padding: var(--s-4); }
+    .phone-body h4 { margin: 0; font-size: 1.15rem; }
+    .phone-body p { margin-top: .35rem; color: var(--muted); font-size: var(--fs-small); }
+    .phone-status { display: inline-flex; align-items: center; gap: .4rem; margin-top: var(--s-3); color: var(--green); font-size: .75rem; font-weight: 750; }
+    .phone-status::before { width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; content: ""; }
+    .member-question { margin-top: var(--s-4); padding: var(--s-3); border: 1px solid var(--line); border-radius: 6px; color: var(--ink); font-size: var(--fs-small); font-weight: 700; }
+    .choice-list { display: grid; gap: var(--s-2); margin-top: var(--s-3); }
+    .choice { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: .65rem .8rem; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink); font-size: var(--fs-small); font-weight: 700; text-align: left; }
+    .choice::after { width: 1rem; height: 1rem; border: 1.5px solid currentColor; border-radius: 50%; content: ""; }
+    .choice:hover:not(:disabled) { border-color: var(--navy); color: var(--navy-2); }
+    .choice.is-selected { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+    .choice.is-selected::after { background: currentColor; box-shadow: inset 0 0 0 3px var(--green-bg); }
+    .member-confirmation { margin-top: var(--s-3); padding: .7rem .8rem; border: 1px solid #BDE6C7; border-radius: 6px; background: var(--green-bg); color: var(--green); font-size: var(--fs-small); font-weight: 700; }
+    .member-confirmation[hidden] { display: none; }
+    .member-textarea { width: 100%; min-height: 92px; margin-top: var(--s-3); padding: .7rem; border: 1px solid var(--line); border-radius: 6px; resize: vertical; color: var(--ink); font-size: var(--fs-small); }
+    .member-submit, .raise-hand { width: 100%; min-height: 42px; margin-top: var(--s-2); border: 0; border-radius: 6px; background: var(--navy); color: #fff; font-size: var(--fs-small); font-weight: 800; }
+    .member-submit:disabled, .raise-hand:disabled { cursor: not-allowed; opacity: .48; }
+    .member-list { margin-top: var(--s-3); }
+    .member-list div { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); padding: .65rem 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: var(--fs-small); }
+    .member-list strong { color: var(--ink); }
+    .member-nav { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: var(--s-4); border-top: 1px solid var(--line); }
+    .member-nav span { padding: .7rem .2rem; color: var(--muted); font-size: .68rem; font-weight: 700; text-align: center; }
+    .member-nav span.is-active { color: var(--navy-2); }
+    .member-caption { max-width: 30ch; margin-top: var(--s-3); color: var(--muted); font-size: var(--fs-small); text-align: center; }
+    .tour-reset { display: inline-flex; margin-top: var(--s-4); padding: 0; border: 0; background: transparent; color: var(--navy-2); font-size: var(--fs-small); font-weight: 750; }
+    .tour-reset:hover { color: var(--navy); text-decoration: underline; }
+
+    .principles { background: var(--lav); }
+    .principles-head { max-width: 56ch; }
+    .principles-head h2 { font-size: var(--fs-h2); }
+    .principles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); margin-top: var(--s-5); }
+    .principle { padding-top: var(--s-3); border-top: 3px solid var(--peri); }
+    .principle h3 { font-size: 1.1rem; }
+    .principle p { margin-top: .5rem; color: var(--muted); font-size: var(--fs-small); }
+    .final { text-align: center; }
+    .final h2 { font-size: var(--fs-h2); }
+    .final p { max-width: 54ch; margin: var(--s-3) auto 0; color: var(--muted); font-size: var(--fs-lead); }
+    .final .hero-actions { justify-content: center; }
+    .site-footer { border-top: 1px solid var(--line); padding-block: var(--s-6) var(--s-4); }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: var(--s-5); }
+    .footer-brand p { max-width: 34ch; margin-top: var(--s-2); color: var(--muted); font-size: var(--fs-small); }
+    .footer-col h3 { color: var(--muted); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
+    .footer-col ul { display: grid; gap: .5rem; margin: var(--s-2) 0 0; padding: 0; list-style: none; }
+    .footer-col a { color: var(--ink); font-size: var(--fs-small); }
+    .footer-col a:hover { color: var(--navy-2); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: var(--s-3); margin-top: var(--s-5); padding-top: var(--s-3); border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: var(--s-4); min-height: 0; }
+      .hero-copy h1 { max-width: 16ch; }
+      .hero-media { max-width: 620px; margin-inline: auto; }
+      .demo-panel { grid-template-columns: 1fr; }
+      .host { border-right: 0; border-bottom: 1px solid var(--line); }
+      .member-side { padding-block: var(--s-6); }
+      .nav { gap: var(--s-2); }
+      .brand .tag, .nav-links, .nav-actions .btn-secondary { display: none; }
+      .nav-links.is-open {
+        position: absolute;
+        z-index: 20;
+        top: 56px;
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: var(--s-2);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--white);
+        box-shadow: 0 14px 30px rgba(25, 27, 53, .12);
+      }
+      .nav-links.is-open a { padding: 12px; }
+      .nav-actions { margin-left: auto; }
+      .nav-actions .btn-primary { min-height: 40px; font-size: var(--fs-small); }
+      .nav-toggle { display: inline-flex; }
+    }
+    @media (max-width: 700px) {
+      :root { --s-8: 4rem; --s-7: 3rem; }
+      .nav { gap: var(--s-2); }
+      .brand .tag, .nav-links, .nav-actions .btn-secondary { display: none; }
+      .nav-links.is-open {
+        position: absolute;
+        z-index: 20;
+        top: 56px;
+        right: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: var(--s-2);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--white);
+        box-shadow: 0 14px 30px rgba(25, 27, 53, .12);
+      }
+      .nav-links.is-open a { padding: 12px; }
+      .nav-actions { margin-left: auto; }
+      .nav-actions .btn-primary { min-height: 40px; font-size: var(--fs-small); }
+      .nav-toggle { display: inline-flex; }
+      .tour-tabs { gap: .15rem; }
+      .tour-tab { min-height: 52px; padding-inline: .35rem; font-size: .78rem; }
+      .demo-banner { align-items: flex-start; flex-direction: column; }
+      .host, .member-side { padding: var(--s-4); }
+      .meeting-row { grid-template-columns: 1fr; }
+      .meeting-row .action { justify-self: start; }
+      .principles-grid, .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#tour">Skip to interactive tour</a>
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Primary">
+      <a class="brand" href="/"><img class="brand-logo" src="/dots-logo-full.png" alt="Data on the Spot"><span class="tag">Meet &middot; Vote &middot; Engage</span></a>
+      <ul class="nav-links" id="site-navigation">
+        <li><a href="/electronic-voting">Electronic Voting</a></li>
+        <li><a href="/meetings-and-votes">Meetings &amp; Events</a></li>
+        <li><a href="/about">About DOTS</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="/demo" aria-current="page">See DOTS in Action</a>
+        <a class="btn btn-primary" href="/talk-to-dots">Talk to DOTS</a>
+      </div>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">Menu</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero-band" aria-labelledby="hero-title">
+      <div class="wrap hero">
+        <div class="hero-copy">
+          <p class="eyebrow">DOTS Connect interactive tour</p>
+          <h1 id="hero-title">See what participation looks like in real time.</h1>
+          <p class="lead">Explore a sample member meeting with live voting, moderated Q&amp;A, and a speaker queue. Hosts guide the meeting while members take part from any device.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#tour">Explore the tour</a>
+            <a class="btn btn-secondary" href="/talk-to-dots">Plan your meeting</a>
+          </div>
+          <p class="hero-proof">Built in real meetings. Ready when it matters.</p>
+        </div>
+        <div class="hero-media">
+          <img src="/dots-connect.png" alt="DOTS Connect live voting displayed on a tablet and phone." />
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap" id="tour" aria-labelledby="tour-title">
+      <div class="tour-head">
+        <p class="eyebrow">Sample AGM</p>
+        <h2 id="tour-title">One meeting. Three ways members take part.</h2>
+        <p class="lead">The host and member views stay connected throughout the meeting, whether people are in the room, online, or joining from both.</p>
+      </div>
+
+      <div class="tour-tabs" role="tablist" aria-label="DOTS Connect tour modes">
+        <button class="tour-tab" type="button" role="tab" aria-selected="true" aria-controls="voting-panel" id="voting-tab" data-tab="voting">Voting</button>
+        <button class="tour-tab" type="button" role="tab" aria-selected="false" aria-controls="qa-panel" id="qa-tab" data-tab="qa">Moderated Q&amp;A</button>
+        <button class="tour-tab" type="button" role="tab" aria-selected="false" aria-controls="queue-panel" id="queue-tab" data-tab="queue">Speaker Queue</button>
+      </div>
+
+      <div class="demo-shell">
+        <div class="demo-banner"><span><strong>DOTS Connect</strong> &middot; Annual General Meeting 2026</span><span>Interactive example</span></div>
+
+        <section class="demo-panel" id="voting-panel" role="tabpanel" aria-labelledby="voting-tab">
+          <div class="host">
+            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
+            <div class="console-title"><h3>Live voting</h3><p>Open a motion when the meeting is ready to decide.</p></div>
+            <div class="meeting-row"><div><h4>Approve the 2024 financial statements</h4><p>Single choice &middot; secret ballot</p></div><button class="action" type="button" id="vote-toggle">Open vote</button></div>
+            <div class="meeting-row"><div><h4>Ratify the appointment of auditors</h4><p>Single choice &middot; scheduled later</p></div><span class="pill">Later</span></div>
+            <div class="meeting-row"><div><h4>Adopt the amended bylaws</h4><p>Single choice &middot; scheduled later</p></div><span class="pill">Later</span></div>
+            <div class="admin-status" id="vote-admin-status" aria-live="polite">The vote is closed and waiting for the host.</div>
+            <div class="result-summary" id="vote-results" hidden aria-live="polite"><div><span>Yes</span><strong id="yes-count">0</strong></div><div><span>No</span><strong id="no-count">0</strong></div><div><span>Abstain</span><strong id="abstain-count">0</strong></div></div>
+          </div>
+          <div class="member-side">
+            <div class="phone" aria-label="Member voting view">
+              <div class="phone-top"><strong>dotsconnect.live</strong><span>Secure vote</span></div>
+              <div class="phone-body">
+                <h4>Annual General Meeting</h4><p>Live vote</p>
+                <span class="phone-status" id="vote-member-state">Waiting for the host</span>
+                <div class="member-question">Approve the 2024 financial statements?</div>
+                <div class="choice-list">
+                  <button class="choice vote-choice" type="button" data-choice="yes" disabled>Yes</button>
+                  <button class="choice vote-choice" type="button" data-choice="no" disabled>No</button>
+                  <button class="choice vote-choice" type="button" data-choice="abstain" disabled>Abstain</button>
+                </div>
+                <p class="member-confirmation" id="vote-confirmation" hidden>Your vote has been recorded.</p>
+                <div class="member-nav"><span>Agenda</span><span class="is-active">Vote</span><span>Q&amp;A</span></div>
+              </div>
+            </div>
+            <p class="member-caption">The member sees the ballot only when the host opens it.</p>
+          </div>
+        </section>
+
+        <section class="demo-panel" id="qa-panel" role="tabpanel" aria-labelledby="qa-tab" hidden>
+          <div class="host">
+            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
+            <div class="console-title"><h3>Moderated Q&amp;A</h3><p>Open questions when the floor is ready for members.</p></div>
+            <button class="action" type="button" id="qa-toggle">Open Q&amp;A</button>
+            <div class="admin-status" id="qa-admin-status" aria-live="polite">Q&amp;A is closed and waiting for the host.</div>
+            <ul class="question-list" id="qa-list"><li class="empty" id="qa-empty">No member questions have been submitted.</li></ul>
+          </div>
+          <div class="member-side">
+            <div class="phone" aria-label="Member Q&A view">
+              <div class="phone-top"><strong>dotsconnect.live</strong><span>Q&amp;A</span></div>
+              <div class="phone-body">
+                <h4>Ask a question</h4><p>Questions are reviewed by the meeting host.</p>
+                <span class="phone-status" id="qa-member-state">Waiting for the host</span>
+                <textarea class="member-textarea" id="qa-input" maxlength="180" placeholder="What would you like to ask?" disabled></textarea>
+                <button class="member-submit" type="button" id="qa-submit" disabled>Submit question</button>
+                <p class="member-confirmation" id="qa-confirmation" hidden>Your question is waiting for review.</p>
+                <div class="member-nav"><span>Agenda</span><span>Vote</span><span class="is-active">Q&amp;A</span></div>
+              </div>
+            </div>
+            <p class="member-caption">Questions arrive in one place for review before they are shared with the room.</p>
+          </div>
+        </section>
+
+        <section class="demo-panel" id="queue-panel" role="tabpanel" aria-labelledby="queue-tab" hidden>
+          <div class="host">
+            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
+            <div class="console-title"><h3>Speaker queue</h3><p>Open the floor and bring members into the conversation in order.</p></div>
+            <button class="action" type="button" id="queue-toggle">Open the floor</button>
+            <div class="admin-status" id="queue-admin-status" aria-live="polite">The floor is closed and waiting for the host.</div>
+            <ol class="queue-list" id="queue-list"><li id="queue-empty"><span>No one is waiting to speak.</span></li></ol>
+          </div>
+          <div class="member-side">
+            <div class="phone" aria-label="Member speaking queue view">
+              <div class="phone-top"><strong>dotsconnect.live</strong><span>Queue</span></div>
+              <div class="phone-body">
+                <h4>Join the speaker queue</h4><p>Raise your hand when the floor is open.</p>
+                <span class="phone-status" id="queue-member-state">Waiting for the host</span>
+                <button class="raise-hand" type="button" id="raise-hand" disabled>Raise hand</button>
+                <div class="member-list"><div><span>Current speaker</span><strong id="current-speaker">-</strong></div><div><span>Your place</span><strong id="queue-position">-</strong></div></div>
+                <p class="member-confirmation" id="queue-confirmation" hidden>You are in the speaker queue.</p>
+                <div class="member-nav"><span>Agenda</span><span>Vote</span><span class="is-active">Queue</span></div>
+              </div>
+            </div>
+            <p class="member-caption">Members can join the conversation without competing to be heard.</p>
+          </div>
+        </section>
+      </div>
+      <button class="tour-reset" id="tour-reset" type="button">Reset interactive tour</button>
+    </section>
+
+    <section class="principles">
+      <div class="wrap section">
+        <div class="principles-head"><p class="eyebrow">Built for confidence</p><h2>The meeting stays clear for everyone involved.</h2></div>
+        <div class="principles-grid">
+          <article class="principle"><h3>Members know what to do</h3><p>One trusted place to follow the agenda, participate, and see what happens next.</p></article>
+          <article class="principle"><h3>Hosts stay in control</h3><p>Open the right interaction at the right moment and keep the meeting moving.</p></article>
+          <article class="principle"><h3>Every outcome has a record</h3><p>Participation, decisions, and results stay clear after the meeting closes.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section wrap final" aria-labelledby="final-title">
+      <p class="eyebrow">Your meeting, your process</p>
+      <h2 id="final-title">See how DOTS would support your next meeting.</h2>
+      <p>Talk to DOTS about your agenda, members, and the moments that need to hold up.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="/talk-to-dots">Talk to DOTS</a><a class="btn btn-secondary" href="/meetings-and-votes">Explore Meetings &amp; Events</a></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand"><a class="brand" href="/">DOTS<span class="dot">.</span></a><p>A trusted place for unions, associations, and member organizations to meet, vote, and engage.</p></div>
+        <div class="footer-col"><h3>Product</h3><ul><li><a href="/electronic-voting">Electronic Voting</a></li><li><a href="/meetings-and-votes">Meetings &amp; Events</a></li><li><a href="/demo" aria-current="page">See DOTS in Action</a></li></ul></div>
+        <div class="footer-col"><h3>Contact</h3><ul><li><a href="/talk-to-dots">Talk to DOTS</a></li><li><a href="tel:18333687123">1.833.368.7123</a></li><li><a href="mailto:sales@dataonthespot.com">sales@dataonthespot.com</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>Copyright 2026 Data On The Spot Inc.</span><span>Built in real meetings. Ready when it matters.</span></div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var navToggle = document.querySelector('.nav-toggle');
+      var navLinks = document.querySelector('.nav-links');
+
+      if (navToggle && navLinks) {
+        navToggle.addEventListener('click', function () {
+          var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+          navToggle.setAttribute('aria-expanded', String(!isOpen));
+          navLinks.classList.toggle('is-open', !isOpen);
+        });
+      }
+
+      function track(eventName) {
+        if (typeof window.plausible === 'function') window.plausible(eventName);
+      }
+
+      var tabs = Array.from(document.querySelectorAll('[data-tab]'));
+      var panels = Array.from(document.querySelectorAll('.demo-panel'));
+      var tabNames = ['voting', 'qa', 'queue'];
+
+      function selectTab(name) {
+        tabs.forEach(function (tab) {
+          var selected = tab.dataset.tab === name;
+          tab.setAttribute('aria-selected', String(selected));
+          tab.tabIndex = selected ? 0 : -1;
+        });
+        panels.forEach(function (panel) { panel.hidden = panel.id !== name + '-panel'; });
+      }
+
+      tabs.forEach(function (tab) { tab.addEventListener('click', function () { selectTab(tab.dataset.tab); }); });
+
+      var voteOpen = false;
+      var voterChoice = null;
+      var voteToggle = document.getElementById('vote-toggle');
+      var voteStatus = document.getElementById('vote-admin-status');
+      var voteMemberState = document.getElementById('vote-member-state');
+      var voteChoices = Array.from(document.querySelectorAll('.vote-choice'));
+      var voteConfirmation = document.getElementById('vote-confirmation');
+      var voteResults = document.getElementById('vote-results');
+      var counts = { yes: 0, no: 0, abstain: 0 };
+
+      function renderVote() {
+        voteToggle.textContent = voteOpen ? 'Close vote' : 'Open vote';
+        voteStatus.textContent = voteOpen ? 'The vote is open to all connected members.' : 'The vote is closed and waiting for the host.';
+        voteStatus.className = 'admin-status' + (voteOpen ? ' is-live' : '');
+        voteMemberState.textContent = voteOpen ? 'Vote is open' : 'Waiting for the host';
+        voteChoices.forEach(function (choice) {
+          choice.disabled = !voteOpen || voterChoice !== null;
+          choice.classList.toggle('is-selected', choice.dataset.choice === voterChoice);
+        });
+        voteConfirmation.hidden = voterChoice === null;
+        voteResults.hidden = voterChoice === null;
+        document.getElementById('yes-count').textContent = counts.yes;
+        document.getElementById('no-count').textContent = counts.no;
+        document.getElementById('abstain-count').textContent = counts.abstain;
+      }
+
+      voteToggle.addEventListener('click', function () { voteOpen = !voteOpen; renderVote(); });
+      voteChoices.forEach(function (choice) { choice.addEventListener('click', function () { voterChoice = choice.dataset.choice; counts[voterChoice] = 1; track('Demo Vote Cast'); renderVote(); }); });
+
+      var qaOpen = false;
+      var qaToggle = document.getElementById('qa-toggle');
+      var qaStatus = document.getElementById('qa-admin-status');
+      var qaMemberState = document.getElementById('qa-member-state');
+      var qaInput = document.getElementById('qa-input');
+      var qaSubmit = document.getElementById('qa-submit');
+      var qaList = document.getElementById('qa-list');
+      var qaEmpty = document.getElementById('qa-empty');
+      var qaConfirmation = document.getElementById('qa-confirmation');
+
+      function renderQa() {
+        qaToggle.textContent = qaOpen ? 'Close Q&A' : 'Open Q&A';
+        qaStatus.textContent = qaOpen ? 'Q&A is open. New member questions are waiting for review.' : 'Q&A is closed and waiting for the host.';
+        qaStatus.className = 'admin-status' + (qaOpen ? ' is-action' : '');
+        qaMemberState.textContent = qaOpen ? 'Questions are open' : 'Waiting for the host';
+        qaInput.disabled = !qaOpen;
+        qaSubmit.disabled = !qaOpen;
+      }
+
+      qaToggle.addEventListener('click', function () { qaOpen = !qaOpen; renderQa(); });
+      qaSubmit.addEventListener('click', function () {
+        var question = qaInput.value.trim();
+        if (!question) return;
+        qaEmpty.hidden = true;
+        var item = document.createElement('li');
+        var text = document.createElement('span');
+        var state = document.createElement('span');
+        text.textContent = question;
+        state.className = 'pill';
+        state.textContent = 'Review';
+        item.append(text, state);
+        qaList.appendChild(item);
+        qaInput.value = '';
+        qaInput.disabled = true;
+        qaSubmit.disabled = true;
+        qaConfirmation.hidden = false;
+        track('Demo Question Submitted');
+      });
+
+      var floorOpen = false;
+      var handRaised = false;
+      var queueToggle = document.getElementById('queue-toggle');
+      var queueStatus = document.getElementById('queue-admin-status');
+      var queueMemberState = document.getElementById('queue-member-state');
+      var raiseHand = document.getElementById('raise-hand');
+      var queueList = document.getElementById('queue-list');
+      var queueEmpty = document.getElementById('queue-empty');
+      var queueConfirmation = document.getElementById('queue-confirmation');
+      var currentSpeaker = document.getElementById('current-speaker');
+      var queuePosition = document.getElementById('queue-position');
+
+      function renderQueue() {
+        queueToggle.textContent = floorOpen ? 'Close the floor' : 'Open the floor';
+        queueStatus.textContent = floorOpen ? 'The floor is open. Members can raise their hands to speak.' : 'The floor is closed and waiting for the host.';
+        queueStatus.className = 'admin-status' + (floorOpen ? ' is-queue' : '');
+        queueMemberState.textContent = floorOpen ? 'The floor is open' : 'Waiting for the host';
+        raiseHand.disabled = !floorOpen || handRaised;
+      }
+
+      queueToggle.addEventListener('click', function () { floorOpen = !floorOpen; renderQueue(); });
+      raiseHand.addEventListener('click', function () {
+        handRaised = true;
+        queueEmpty.hidden = true;
+        var item = document.createElement('li');
+        var name = document.createElement('strong');
+        var position = document.createElement('span');
+        name.textContent = 'Member 1';
+        position.textContent = '1';
+        item.append(name, position);
+        queueList.appendChild(item);
+        currentSpeaker.textContent = 'Member 1';
+        queuePosition.textContent = '1';
+        queueConfirmation.hidden = false;
+        track('Demo Speaker Queue Joined');
+        renderQueue();
+      });
+
+      document.getElementById('tour-reset').addEventListener('click', function () {
+        voteOpen = false; voterChoice = null; counts = { yes: 0, no: 0, abstain: 0 }; renderVote();
+        qaOpen = false; qaInput.value = ''; qaConfirmation.hidden = true; qaEmpty.hidden = false; Array.from(qaList.querySelectorAll('li')).forEach(function (item) { item.remove(); }); qaList.appendChild(qaEmpty); renderQa();
+        floorOpen = false; handRaised = false; queueConfirmation.hidden = true; queueEmpty.hidden = false; Array.from(queueList.querySelectorAll('li')).forEach(function (item) { if (item !== queueEmpty) item.remove(); }); currentSpeaker.textContent = '-'; queuePosition.textContent = '-'; renderQueue();
+        selectTab('voting');
+      });
+
+      renderVote();
+      renderQa();
+      renderQueue();
+    })();
+  </script>
+  <script>
+    (function () {
+      function track(eventName) {
+        if (typeof window.plausible === 'function') window.plausible(eventName);
+      }
+      document.addEventListener('click', function (event) {
+        var link = event.target.closest('a[href]');
+        if (!link) return;
+        var href = link.getAttribute('href');
+        if (href === '/talk-to-dots') track('Talk to DOTS');
+        else if (href === '/demo') track('See DOTS in Action');
+        else if (href.indexOf('tel:') === 0) track('Phone Click');
+        else if (href.indexOf('mailto:') === 0) track('Email Click');
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dots-connect-site3.vercel.app/sitemap.xml

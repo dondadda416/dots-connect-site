@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#2E3192">
+<title>Book a demo · Data On The Spot</title>
+<meta name="description" content="Tell us about your event and we'll get back to you within 24 hours.">
+<link rel="icon" href="favicon-32.png" sizes="32x32">
+<style>
+:root{
+  --navy:#2E3192; --navy-2:#3A3DAE; --indigo:#5B5FCF; --peri:#8A8DE8;
+  --lav:#EEF0FB; --lav-2:#E3E6F7; --ink:#1A1D33; --muted:#5B6075;
+  --line:#E2E5F2; --white:#fff; --green:#1A7F37; --red:#D14343;
+  --radius:18px; --shadow:0 10px 30px rgba(46,49,146,.10); --maxw:1120px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--white);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{max-width:100%}
+.wrap{max-width:880px;margin:0 auto;padding:0 24px}
+h1,h2,h3{line-height:1.15;letter-spacing:-.02em}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .row{max-width:var(--maxw);margin:0 auto;padding:0 24px;height:88px;display:flex;align-items:center;justify-content:space-between}
+.logo-img{height:72px;width:auto;display:block}
+.nav a.back{font-weight:600;font-size:14px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.nav a.back:hover{color:var(--navy)}
+
+/* header */
+.head{background:linear-gradient(160deg,var(--lav),#fff);padding:54px 0 30px;border-bottom:1px solid var(--line)}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--indigo);background:var(--lav-2);padding:6px 14px;border-radius:999px;margin-bottom:16px}
+.head h1{font-size:clamp(32px,4.4vw,46px);font-weight:800}
+.head p{color:var(--muted);font-size:clamp(16px,1.6vw,19px);margin-top:14px;max-width:560px}
+
+/* form */
+form{padding:34px 0 70px}
+.fset{border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px;margin-bottom:20px;box-shadow:var(--shadow);background:#fff}
+.fset-head{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.fnum{flex:0 0 auto;width:32px;height:32px;border-radius:9px;background:linear-gradient(160deg,var(--indigo),var(--navy));color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.fset-head h2{font-size:19px;font-weight:800}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:4px}
+.field.full{grid-column:1/-1}
+label .lb{font-weight:600;font-size:14px}
+label .opt{color:var(--muted);font-weight:500;font-size:12px;margin-left:6px}
+input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number],textarea,select{
+  width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:11px;font:inherit;font-size:15px;color:var(--ink);background:#fff;transition:border-color .15s,box-shadow .15s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--indigo);box-shadow:0 0 0 3px rgba(91,95,207,.14)}
+textarea{min-height:120px;resize:vertical}
+.sublabel{font-weight:600;font-size:14px;margin:6px 0 10px}
+
+/* choice chips (radio) */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chip{position:relative;cursor:pointer}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.chip span{display:inline-block;padding:10px 18px;border:1px solid var(--line);border-radius:999px;font-size:14px;font-weight:600;color:var(--muted);transition:.15s}
+.chip input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.chip input:focus-visible+span{box-shadow:0 0 0 3px rgba(91,95,207,.25)}
+
+/* interest cards (checkbox) */
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.cards{grid-template-columns:1fr}}
+.icard{position:relative;cursor:pointer}
+.icard input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.icard .body{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--line);border-radius:13px;transition:.15s;height:100%}
+.icard .emo{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:0 0 34px}
+.icard .emo svg{width:20px;height:20px;display:block}
+.icard .t{display:block;font-weight:700;font-size:14.5px}
+.icard .d{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.icard input:checked+.body{border-color:var(--navy);background:var(--lav);box-shadow:0 0 0 1px var(--navy) inset}
+.icard input:focus-visible+.body{box-shadow:0 0 0 3px rgba(91,95,207,.25)}
+
+/* submit */
+.actions{margin-top:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:16px;padding:15px 34px;border-radius:999px;border:none;cursor:pointer;background:linear-gradient(160deg,var(--navy-2),var(--navy));color:#fff;box-shadow:0 8px 20px rgba(46,49,146,.22);transition:filter .15s,transform .05s}
+.btn:hover{filter:brightness(1.07)}
+.btn:active{transform:translateY(1px)}
+.note{margin-top:14px;font-size:13.5px;color:var(--muted)}
+.note a{color:var(--navy);font-weight:600}
+
+/* success */
+.thanks{display:none;text-align:center;padding:60px 24px 80px;max-width:560px;margin:0 auto}
+.thanks .check{width:74px;height:74px;border-radius:50%;background:var(--lav);display:flex;align-items:center;justify-content:center;margin:0 auto 22px}
+.thanks h2{font-size:30px;font-weight:800}
+.thanks p{color:var(--muted);font-size:17px;margin-top:12px}
+.thanks .btn{margin-top:26px}
+body.sent .head,body.sent form{display:none}
+body.sent .thanks{display:block}
+
+/* footer */
+.foot{border-top:1px solid var(--line);background:#fafbff;padding:26px 0;font-size:13.5px;color:var(--muted)}
+.foot .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;justify-content:space-between}
+.foot a{color:var(--navy);font-weight:600}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="row">
+  <a href="/" aria-label="DOTS home"><img src="dots-logo-full.png" alt="Data On The Spot" class="logo-img"></a>
+  <a class="back" href="/">← Back to site</a>
+</div></nav>
+
+<header class="head"><div class="wrap">
+  <span class="eyebrow">Book a demo</span>
+  <h1>Tell us about your event.</h1>
+  <p>Share a few details and a DOTS specialist will get back to you within 24 hours.</p>
+</div></header>
+
+<form action="https://formsubmit.co/jp@dataonthespot.com" method="POST">
+  <div class="wrap">
+    <!-- FormSubmit config -->
+    <input type="hidden" name="_subject" value="New demo request — DOTS website">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_next" value="https://dots-connect-site.vercel.app/demo-request?sent=1">
+    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+    <!-- 01 details -->
+    <div class="fset">
+      <div class="fset-head"><span class="fnum">01</span><h2>Your details</h2></div>
+      <div class="grid2">
+        <div class="field"><label><span class="lb">Full name</span></label><input type="text" name="Full Name" required></div>
+        <div class="field"><label><span class="lb">Email</span></label><input type="email" name="Email" required></div>
+        <div class="field"><label><span class="lb">Organization</span></label><input type="text" name="Organization" required></div>
+        <div class="field"><label><span class="lb">Phone</span><span class="opt">optional</span></label><input type="tel" name="Phone"></div>
+      </div>
+    </div>
+
+    <!-- 02 event -->
+    <div class="fset">
+      <div class="fset-head"><span class="fnum">02</span><h2>Your event</h2></div>
+      <div class="grid2">
+        <div class="field"><label><span class="lb">Approximate event date</span><span class="opt">optional</span></label><input type="date" name="Event Date"></div>
+        <div class="field"><label><span class="lb">Expected participants</span><span class="opt">optional</span></label><input type="number" name="Expected Participants" min="0" step="1" placeholder="e.g. 250"></div>
+        <div class="field full"><label><span class="lb">Event location / city</span><span class="opt">optional</span></label><input type="text" name="Event Location"></div>
+      </div>
+      <div style="margin-top:16px">
+        <div class="sublabel">Event format</div>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="Event Format" value="In Person"><span>In Person</span></label>
+          <label class="chip"><input type="radio" name="Event Format" value="Virtual"><span>Virtual</span></label>
+          <label class="chip"><input type="radio" name="Event Format" value="Hybrid"><span>Hybrid</span></label>
+        </div>
+      </div>
+      <div style="margin-top:18px">
+        <div class="sublabel">Support level needed</div>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="Support Level" value="DOTS onsite"><span>DOTS onsite</span></label>
+          <label class="chip"><input type="radio" name="Support Level" value="Remote support"><span>Remote support</span></label>
+          <label class="chip"><input type="radio" name="Support Level" value="Self-service"><span>Self-service</span></label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 interests -->
+    <div class="fset">
+      <div class="fset-head"><span class="fnum">03</span><h2>What are you interested in?</h2></div>
+      <div class="cards">
+        <label class="icard"><input type="checkbox" name="Interested In" value="Live voting"><span class="body"><span class="emo" style="background:#E2F5F5;color:#2BB5B5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M6 20v-6M11 20V7M16 20v-4"/></svg></span><span><span class="t">Live voting</span><span class="d">Real-time results display for your audience</span></span></span></label>
+        <label class="icard"><input type="checkbox" name="Interested In" value="Event app"><span class="body"><span class="emo" style="background:#EEEBFB;color:#6D4AE0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M11 18h2"/></svg></span><span><span class="t">Event app</span><span class="d">Branded mobile app for your event</span></span></span></label>
+        <label class="icard"><input type="checkbox" name="Interested In" value="Zoom / virtual integration"><span class="body"><span class="emo" style="background:#E6EFFC;color:#2F7BE8"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M9 21h6M12 17v4"/></svg></span><span><span class="t">Zoom / virtual integration</span><span class="d">Seamless hybrid or fully virtual voting</span></span></span></label>
+        <label class="icard"><input type="checkbox" name="Interested In" value="Self-service platform"><span class="body"><span class="emo" style="background:#FDF0E4;color:#F08A3C"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M3 12h3M18 12h3M5.5 5.5l2 2M16.5 16.5l2 2M18.5 5.5l-2 2M7.5 16.5l-2 2"/></svg></span><span><span class="t">Self-service platform</span><span class="d">Full platform access to run it yourself</span></span></span></label>
+        <label class="icard"><input type="checkbox" name="Interested In" value="Attendee registration"><span class="body"><span class="emo" style="background:#E7F6EA;color:#3FAE5A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 3.5h6a1 1 0 0 1 1 1V6H8V4.5a1 1 0 0 1 1-1z"/><path d="M9 12h6M9 16h4"/></svg></span><span><span class="t">Attendee registration</span><span class="d">Online check-in and registration management</span></span></span></label>
+        <label class="icard"><input type="checkbox" name="Interested In" value="Member database"><span class="body"><span class="emo" style="background:#EFEAFB;color:#7B5BD6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></svg></span><span><span class="t">Member database</span><span class="d">Member data management and imports</span></span></span></label>
+      </div>
+    </div>
+
+    <!-- 04 anything else -->
+    <div class="fset">
+      <div class="fset-head"><span class="fnum">04</span><h2>Anything else?</h2></div>
+      <div class="field full"><label><span class="lb">Tell us more about your event or what you're looking for</span><span class="opt">optional</span></label><textarea name="Message"></textarea></div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn">Send my request →</button>
+      <p class="note">We usually respond within 24 hours. Prefer email? <a href="mailto:credentials@dataonthespot.com">credentials@dataonthespot.com</a></p>
+    </div>
+  </div>
+</form>
+
+<div class="thanks">
+  <div class="check"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#2E3192" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+  <h2>Request received</h2>
+  <p>Thanks — your demo request is on its way to the DOTS team. We'll be in touch within 24 hours.</p>
+  <a class="btn" href="/">Back to site</a>
+</div>
+
+<footer class="foot"><div class="wrap">
+  <span>© <span id="yr"></span> Data On The Spot · 65 Overlea Blvd, East York, ON</span>
+  <span><a href="mailto:credentials@dataonthespot.com">credentials@dataonthespot.com</a> · 1.833.368.7123</span>
+</div></footer>
+
+<script>
+  document.getElementById('yr').textContent=new Date().getFullYear();
+  if(new URLSearchParams(location.search).get('sent')==='1'){document.body.classList.add('sent');window.scrollTo(0,0);}
+</script>
+</body>
+</html>
