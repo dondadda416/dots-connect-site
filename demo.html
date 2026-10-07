@@ -253,6 +253,10 @@
       .footer-bottom { align-items: flex-start; flex-direction: column; }
     }
   </style>
+  <link rel="stylesheet" href="/site-navigation.css">
+  <script src="/site-navigation.js" defer></script>
+  <link rel="stylesheet" href="/demo-tour.css">
+  <script src="/demo-tour.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#tour">Skip to interactive tour</a>
@@ -262,6 +266,7 @@
       <ul class="nav-links" id="site-navigation">
         <li><a href="/electronic-voting">Electronic Voting</a></li>
         <li><a href="/meetings-and-votes">Meetings &amp; Events</a></li>
+        <li class="mobile-tour"><a href="/demo">Try the interactive demo</a></li>
         <li><a href="/about">About DOTS</a></li>
       </ul>
       <div class="nav-actions">
@@ -277,16 +282,13 @@
       <div class="wrap hero">
         <div class="hero-copy">
           <p class="eyebrow">DOTS Connect interactive tour</p>
-          <h1 id="hero-title">See what participation looks like in real time.</h1>
-          <p class="lead">Explore a sample member meeting with live voting, moderated Q&amp;A, and a speaker queue. Hosts guide the meeting while members take part from any device.</p>
+          <h1 id="hero-title">Take a seat.<br>Try it as a member.</h1>
+          <p class="lead">Cast a sample ballot, ask a question, and join the speaker queue. The meeting is already open, so you can jump straight in.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#tour">Explore the tour</a>
+            <a class="btn btn-primary" href="#tour">Start with a sample vote</a>
             <a class="btn btn-secondary" href="/talk-to-dots">Plan your meeting</a>
           </div>
-          <p class="hero-proof">Built in real meetings. Ready when it matters.</p>
-        </div>
-        <div class="hero-media">
-          <img src="/dots-connect.png" alt="DOTS Connect live voting displayed on a tablet and phone." />
+          <p class="hero-proof">No account needed. This is an illustrative demo, not a live meeting.</p>
         </div>
       </div>
     </section>
@@ -295,7 +297,7 @@
       <div class="tour-head">
         <p class="eyebrow">Sample AGM</p>
         <h2 id="tour-title">One meeting. Three ways members take part.</h2>
-        <p class="lead">The host and member views stay connected throughout the meeting, whether people are in the room, online, or joining from both.</p>
+        <p class="lead">Start on the member screen. Open the optional organizer controls to see what happens behind the scenes.</p>
       </div>
 
       <div class="tour-tabs" role="tablist" aria-label="DOTS Connect tour modes">
@@ -308,68 +310,66 @@
         <div class="demo-banner"><span><strong>DOTS Connect</strong> &middot; Annual General Meeting 2026</span><span>Interactive example</span></div>
 
         <section class="demo-panel" id="voting-panel" role="tabpanel" aria-labelledby="voting-tab">
-          <div class="host">
-            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
-            <div class="console-title"><h3>Live voting</h3><p>Open a motion when the meeting is ready to decide.</p></div>
-            <div class="meeting-row"><div><h4>Approve the 2024 financial statements</h4><p>Single choice &middot; secret ballot</p></div><button class="action" type="button" id="vote-toggle">Open vote</button></div>
-            <div class="meeting-row"><div><h4>Ratify the appointment of auditors</h4><p>Single choice &middot; scheduled later</p></div><span class="pill">Later</span></div>
-            <div class="meeting-row"><div><h4>Adopt the amended bylaws</h4><p>Single choice &middot; scheduled later</p></div><span class="pill">Later</span></div>
-            <div class="admin-status" id="vote-admin-status" aria-live="polite">The vote is closed and waiting for the host.</div>
-            <div class="result-summary" id="vote-results" hidden aria-live="polite"><div><span>Yes</span><strong id="yes-count">0</strong></div><div><span>No</span><strong id="no-count">0</strong></div><div><span>Abstain</span><strong id="abstain-count">0</strong></div></div>
-          </div>
-          <div class="member-side">
+<div class="member-side">
             <div class="phone" aria-label="Member voting view">
               <div class="phone-top"><strong>dotsconnect.live</strong><span>Secure vote</span></div>
               <div class="phone-body">
                 <h4>Annual General Meeting</h4><p>Live vote</p>
                 <span class="phone-status" id="vote-member-state">Waiting for the host</span>
-                <div class="member-question">Approve the 2024 financial statements?</div>
-                <div class="choice-list">
+                <div class="member-question">Approve the 2025 financial statements?</div>
+                <p class="vote-progress" id="vote-progress" aria-live="polite"></p>
+                <div class="choice-list" id="vote-choices">
                   <button class="choice vote-choice" type="button" data-choice="yes" disabled>Yes</button>
                   <button class="choice vote-choice" type="button" data-choice="no" disabled>No</button>
                   <button class="choice vote-choice" type="button" data-choice="abstain" disabled>Abstain</button>
                 </div>
-                <p class="member-confirmation" id="vote-confirmation" hidden>Your vote has been recorded.</p>
+                <button class="member-submit" type="button" id="vote-review-button" disabled>Review vote</button>
+                <div class="vote-review" id="vote-review" hidden><p>Your selection</p><strong id="vote-review-choice"></strong><p>Check your choice before submitting.</p><button class="member-submit" type="button" id="vote-submit">Submit sample vote</button><button class="action" type="button" id="vote-change">Change selection</button></div>
+                <p class="member-confirmation" id="vote-confirmation" role="status" tabindex="-1" hidden>Your sample vote has been recorded. Thank you for taking part.</p>
                 <div class="member-nav"><span>Agenda</span><span class="is-active">Vote</span><span>Q&amp;A</span></div>
               </div>
             </div>
-            <p class="member-caption">The member sees the ballot only when the host opens it.</p>
+            <p class="member-caption">Choose, review, then submit. Your selection is not recorded until you confirm.</p>
           </div>
-        </section>
+<div class="member-guide"><h3>Make your choice. Review it. Submit.</h3><ol class="guide-steps"><li>Choose Yes, No, or Abstain.</li><li>Select <strong>Review vote</strong> and check your choice.</li><li>Submit the sample ballot to see your confirmation.</li></ol><p class="guide-note">Want to see the organizer side? Open the controls below to close the vote and reveal the sample totals.</p><details class="host"><summary>Explore organizer controls (optional)</summary><div class="host-content">
+            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
+            <div class="console-title"><h3>Live voting</h3><p>Open a motion when the meeting is ready to decide.</p></div>
+            <div class="meeting-row"><div><h4>Approve the 2025 financial statements</h4><p>Single choice &middot; secret ballot</p></div><button class="action" type="button" id="vote-toggle">Open vote</button></div>
+            <div class="meeting-row"><div><h4>Ratify the appointment of auditors</h4><p>Single choice &middot; scheduled later</p></div><span class="pill">Later</span></div>
+            <div class="meeting-row"><div><h4>Adopt the amended bylaws</h4><p>Single choice &middot; scheduled later</p></div><span class="pill">Later</span></div>
+            <div class="admin-status" id="vote-admin-status" aria-live="polite">The vote is closed and waiting for the host.</div>
+            <p class="result-note">This single-member example shows sample totals after you close the vote. It does not demonstrate real ballot privacy.</p>
+            <div class="result-summary" id="vote-results" hidden aria-live="polite"><div><span>Yes</span><strong id="yes-count">0</strong></div><div><span>No</span><strong id="no-count">0</strong></div><div><span>Abstain</span><strong id="abstain-count">0</strong></div></div>
+          </div></details></div>
+</section>
 
         <section class="demo-panel" id="qa-panel" role="tabpanel" aria-labelledby="qa-tab" hidden>
-          <div class="host">
-            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
-            <div class="console-title"><h3>Moderated Q&amp;A</h3><p>Open questions when the floor is ready for members.</p></div>
-            <button class="action" type="button" id="qa-toggle">Open Q&amp;A</button>
-            <div class="admin-status" id="qa-admin-status" aria-live="polite">Q&amp;A is closed and waiting for the host.</div>
-            <ul class="question-list" id="qa-list"><li class="empty" id="qa-empty">No member questions have been submitted.</li></ul>
-          </div>
-          <div class="member-side">
+<div class="member-side">
             <div class="phone" aria-label="Member Q&A view">
               <div class="phone-top"><strong>dotsconnect.live</strong><span>Q&amp;A</span></div>
               <div class="phone-body">
                 <h4>Ask a question</h4><p>Questions are reviewed by the meeting host.</p>
                 <span class="phone-status" id="qa-member-state">Waiting for the host</span>
+                <label class="field-label" for="qa-input">Your sample question</label>
                 <textarea class="member-textarea" id="qa-input" maxlength="180" placeholder="What would you like to ask?" disabled></textarea>
                 <button class="member-submit" type="button" id="qa-submit" disabled>Submit question</button>
-                <p class="member-confirmation" id="qa-confirmation" hidden>Your question is waiting for review.</p>
+                <p class="member-confirmation" id="qa-confirmation" role="status" tabindex="-1" hidden>Your question is waiting for review.</p>
                 <div class="member-nav"><span>Agenda</span><span>Vote</span><span class="is-active">Q&amp;A</span></div>
               </div>
             </div>
             <p class="member-caption">Questions arrive in one place for review before they are shared with the room.</p>
           </div>
-        </section>
+<div class="member-guide"><h3>Get your question into the conversation.</h3><ol class="guide-steps"><li>Type a sample question for the meeting.</li><li>Submit it for host review.</li><li>Open the organizer controls to approve it for the presenter.</li></ol><p class="guide-note">Moderation gives the host a chance to review questions before they are shared with the meeting.</p><details class="host"><summary>Explore organizer controls (optional)</summary><div class="host-content">
+            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
+            <div class="console-title"><h3>Moderated Q&amp;A</h3><p>Open questions when the floor is ready for members.</p></div>
+            <button class="action" type="button" id="qa-toggle">Open Q&amp;A</button>
+            <div class="admin-status" id="qa-admin-status" aria-live="polite">Q&amp;A is closed and waiting for the host.</div>
+            <ul class="question-list" id="qa-list"><li class="empty" id="qa-empty">No member questions have been submitted.</li></ul>
+          </div></details></div>
+</section>
 
         <section class="demo-panel" id="queue-panel" role="tabpanel" aria-labelledby="queue-tab" hidden>
-          <div class="host">
-            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
-            <div class="console-title"><h3>Speaker queue</h3><p>Open the floor and bring members into the conversation in order.</p></div>
-            <button class="action" type="button" id="queue-toggle">Open the floor</button>
-            <div class="admin-status" id="queue-admin-status" aria-live="polite">The floor is closed and waiting for the host.</div>
-            <ol class="queue-list" id="queue-list"><li id="queue-empty"><span>No one is waiting to speak.</span></li></ol>
-          </div>
-          <div class="member-side">
+<div class="member-side">
             <div class="phone" aria-label="Member speaking queue view">
               <div class="phone-top"><strong>dotsconnect.live</strong><span>Queue</span></div>
               <div class="phone-body">
@@ -377,14 +377,23 @@
                 <span class="phone-status" id="queue-member-state">Waiting for the host</span>
                 <button class="raise-hand" type="button" id="raise-hand" disabled>Raise hand</button>
                 <div class="member-list"><div><span>Current speaker</span><strong id="current-speaker">-</strong></div><div><span>Your place</span><strong id="queue-position">-</strong></div></div>
-                <p class="member-confirmation" id="queue-confirmation" hidden>You are in the speaker queue.</p>
+                <p class="member-confirmation" id="queue-confirmation" role="status" tabindex="-1" hidden>You are in the speaker queue.</p>
                 <div class="member-nav"><span>Agenda</span><span>Vote</span><span class="is-active">Queue</span></div>
               </div>
             </div>
             <p class="member-caption">Members can join the conversation without competing to be heard.</p>
           </div>
-        </section>
+<div class="member-guide"><h3>Ask for the floor. See your place.</h3><ol class="guide-steps"><li>Select <strong>Raise hand</strong> to join the queue.</li><li>Your position appears on the member screen.</li><li>Open the organizer controls and call the next speaker.</li></ol><p class="guide-note">Joining the queue is a request to speak. The chair decides when it is your turn.</p><details class="host"><summary>Explore organizer controls (optional)</summary><div class="host-content">
+            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
+            <div class="console-title"><h3>Speaker queue</h3><p>Open the floor and bring members into the conversation in order.</p></div>
+            <button class="action" type="button" id="queue-toggle">Open the floor</button>
+            <div class="admin-status" id="queue-admin-status" aria-live="polite">The floor is closed and waiting for the host.</div>
+            <ol class="queue-list" id="queue-list"><li id="queue-empty"><span>No one is waiting to speak.</span></li><li id="queue-member" hidden><strong>Member 1</strong><span>1</span></li></ol><button class="action" id="call-speaker" type="button" disabled>Call next speaker</button>
+          </div></details></div>
+</section>
       </div>
+      <p class="tour-disclaimer">For illustration only. Sample ballots and questions stay in this browser tab. Reset or reload the page to clear them.</p>
+      <noscript><p>This interactive example needs JavaScript. <a href="/talk-to-dots">Contact DOTS for a guided demo.</a></p></noscript>
       <button class="tour-reset" id="tour-reset" type="button">Reset interactive tour</button>
     </section>
 
@@ -418,156 +427,7 @@
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var navToggle = document.querySelector('.nav-toggle');
-      var navLinks = document.querySelector('.nav-links');
 
-      if (navToggle && navLinks) {
-        navToggle.addEventListener('click', function () {
-          var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-          navToggle.setAttribute('aria-expanded', String(!isOpen));
-          navLinks.classList.toggle('is-open', !isOpen);
-        });
-      }
-
-      function track(eventName) {
-        if (typeof window.plausible === 'function') window.plausible(eventName);
-      }
-
-      var tabs = Array.from(document.querySelectorAll('[data-tab]'));
-      var panels = Array.from(document.querySelectorAll('.demo-panel'));
-      var tabNames = ['voting', 'qa', 'queue'];
-
-      function selectTab(name) {
-        tabs.forEach(function (tab) {
-          var selected = tab.dataset.tab === name;
-          tab.setAttribute('aria-selected', String(selected));
-          tab.tabIndex = selected ? 0 : -1;
-        });
-        panels.forEach(function (panel) { panel.hidden = panel.id !== name + '-panel'; });
-      }
-
-      tabs.forEach(function (tab) { tab.addEventListener('click', function () { selectTab(tab.dataset.tab); }); });
-
-      var voteOpen = false;
-      var voterChoice = null;
-      var voteToggle = document.getElementById('vote-toggle');
-      var voteStatus = document.getElementById('vote-admin-status');
-      var voteMemberState = document.getElementById('vote-member-state');
-      var voteChoices = Array.from(document.querySelectorAll('.vote-choice'));
-      var voteConfirmation = document.getElementById('vote-confirmation');
-      var voteResults = document.getElementById('vote-results');
-      var counts = { yes: 0, no: 0, abstain: 0 };
-
-      function renderVote() {
-        voteToggle.textContent = voteOpen ? 'Close vote' : 'Open vote';
-        voteStatus.textContent = voteOpen ? 'The vote is open to all connected members.' : 'The vote is closed and waiting for the host.';
-        voteStatus.className = 'admin-status' + (voteOpen ? ' is-live' : '');
-        voteMemberState.textContent = voteOpen ? 'Vote is open' : 'Waiting for the host';
-        voteChoices.forEach(function (choice) {
-          choice.disabled = !voteOpen || voterChoice !== null;
-          choice.classList.toggle('is-selected', choice.dataset.choice === voterChoice);
-        });
-        voteConfirmation.hidden = voterChoice === null;
-        voteResults.hidden = voterChoice === null;
-        document.getElementById('yes-count').textContent = counts.yes;
-        document.getElementById('no-count').textContent = counts.no;
-        document.getElementById('abstain-count').textContent = counts.abstain;
-      }
-
-      voteToggle.addEventListener('click', function () { voteOpen = !voteOpen; renderVote(); });
-      voteChoices.forEach(function (choice) { choice.addEventListener('click', function () { voterChoice = choice.dataset.choice; counts[voterChoice] = 1; track('Demo Vote Cast'); renderVote(); }); });
-
-      var qaOpen = false;
-      var qaToggle = document.getElementById('qa-toggle');
-      var qaStatus = document.getElementById('qa-admin-status');
-      var qaMemberState = document.getElementById('qa-member-state');
-      var qaInput = document.getElementById('qa-input');
-      var qaSubmit = document.getElementById('qa-submit');
-      var qaList = document.getElementById('qa-list');
-      var qaEmpty = document.getElementById('qa-empty');
-      var qaConfirmation = document.getElementById('qa-confirmation');
-
-      function renderQa() {
-        qaToggle.textContent = qaOpen ? 'Close Q&A' : 'Open Q&A';
-        qaStatus.textContent = qaOpen ? 'Q&A is open. New member questions are waiting for review.' : 'Q&A is closed and waiting for the host.';
-        qaStatus.className = 'admin-status' + (qaOpen ? ' is-action' : '');
-        qaMemberState.textContent = qaOpen ? 'Questions are open' : 'Waiting for the host';
-        qaInput.disabled = !qaOpen;
-        qaSubmit.disabled = !qaOpen;
-      }
-
-      qaToggle.addEventListener('click', function () { qaOpen = !qaOpen; renderQa(); });
-      qaSubmit.addEventListener('click', function () {
-        var question = qaInput.value.trim();
-        if (!question) return;
-        qaEmpty.hidden = true;
-        var item = document.createElement('li');
-        var text = document.createElement('span');
-        var state = document.createElement('span');
-        text.textContent = question;
-        state.className = 'pill';
-        state.textContent = 'Review';
-        item.append(text, state);
-        qaList.appendChild(item);
-        qaInput.value = '';
-        qaInput.disabled = true;
-        qaSubmit.disabled = true;
-        qaConfirmation.hidden = false;
-        track('Demo Question Submitted');
-      });
-
-      var floorOpen = false;
-      var handRaised = false;
-      var queueToggle = document.getElementById('queue-toggle');
-      var queueStatus = document.getElementById('queue-admin-status');
-      var queueMemberState = document.getElementById('queue-member-state');
-      var raiseHand = document.getElementById('raise-hand');
-      var queueList = document.getElementById('queue-list');
-      var queueEmpty = document.getElementById('queue-empty');
-      var queueConfirmation = document.getElementById('queue-confirmation');
-      var currentSpeaker = document.getElementById('current-speaker');
-      var queuePosition = document.getElementById('queue-position');
-
-      function renderQueue() {
-        queueToggle.textContent = floorOpen ? 'Close the floor' : 'Open the floor';
-        queueStatus.textContent = floorOpen ? 'The floor is open. Members can raise their hands to speak.' : 'The floor is closed and waiting for the host.';
-        queueStatus.className = 'admin-status' + (floorOpen ? ' is-queue' : '');
-        queueMemberState.textContent = floorOpen ? 'The floor is open' : 'Waiting for the host';
-        raiseHand.disabled = !floorOpen || handRaised;
-      }
-
-      queueToggle.addEventListener('click', function () { floorOpen = !floorOpen; renderQueue(); });
-      raiseHand.addEventListener('click', function () {
-        handRaised = true;
-        queueEmpty.hidden = true;
-        var item = document.createElement('li');
-        var name = document.createElement('strong');
-        var position = document.createElement('span');
-        name.textContent = 'Member 1';
-        position.textContent = '1';
-        item.append(name, position);
-        queueList.appendChild(item);
-        currentSpeaker.textContent = 'Member 1';
-        queuePosition.textContent = '1';
-        queueConfirmation.hidden = false;
-        track('Demo Speaker Queue Joined');
-        renderQueue();
-      });
-
-      document.getElementById('tour-reset').addEventListener('click', function () {
-        voteOpen = false; voterChoice = null; counts = { yes: 0, no: 0, abstain: 0 }; renderVote();
-        qaOpen = false; qaInput.value = ''; qaConfirmation.hidden = true; qaEmpty.hidden = false; Array.from(qaList.querySelectorAll('li')).forEach(function (item) { item.remove(); }); qaList.appendChild(qaEmpty); renderQa();
-        floorOpen = false; handRaised = false; queueConfirmation.hidden = true; queueEmpty.hidden = false; Array.from(queueList.querySelectorAll('li')).forEach(function (item) { if (item !== queueEmpty) item.remove(); }); currentSpeaker.textContent = '-'; queuePosition.textContent = '-'; renderQueue();
-        selectTab('voting');
-      });
-
-      renderVote();
-      renderQa();
-      renderQueue();
-    })();
-  </script>
   <script>
     (function () {
       function track(eventName) {
@@ -576,7 +436,7 @@
       document.addEventListener('click', function (event) {
         var link = event.target.closest('a[href]');
         if (!link) return;
-        var href = link.getAttribute('href');
+        var href = link.getAttribute('href').split(/[?#]/)[0];
         if (href === '/talk-to-dots') track('Talk to DOTS');
         else if (href === '/demo') track('See DOTS in Action');
         else if (href.indexOf('tel:') === 0) track('Phone Click');

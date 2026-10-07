@@ -468,6 +468,8 @@
       .field-row { grid-template-columns: 1fr; }
     }
   </style>
+  <link rel="stylesheet" href="/site-navigation.css">
+  <script src="/site-navigation.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -482,6 +484,7 @@
       <ul class="nav-links" id="site-navigation">
         <li><a href="/electronic-voting">Electronic Voting</a></li>
         <li><a href="/meetings-and-votes">Meetings &amp; Events</a></li>
+        <li class="mobile-tour"><a href="/demo">Try the interactive demo</a></li>
         <li><a href="/about">About DOTS</a></li>
       </ul>
       <div class="nav-cta">
@@ -666,19 +669,7 @@
     </div>
   </footer>
 
-  <script>
-    // Minimal, progressive: mobile menu toggle reveals the nav links inline.
-    (function () {
-      var toggle = document.querySelector('.nav-toggle');
-      var links = document.querySelector('.nav-links');
-      if (!toggle || !links) return;
-      toggle.addEventListener('click', function () {
-        var open = toggle.getAttribute('aria-expanded') === 'true';
-        links.classList.toggle('is-open', !open);
-        toggle.setAttribute('aria-expanded', String(!open));
-      });
-    })();
-  </script>
+
   <script>
     (function () {
       var form = document.getElementById('talk-form');
@@ -736,7 +727,7 @@
       document.addEventListener('click', function (event) {
         var link = event.target.closest('a[href]');
         if (!link) return;
-        var href = link.getAttribute('href');
+        var href = link.getAttribute('href').split(/[?#]/)[0];
         if (href === '/talk-to-dots') track('Talk to DOTS');
         else if (href === '/demo') track('See DOTS in Action');
         else if (href.indexOf('tel:') === 0) track('Phone Click');
