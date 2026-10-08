@@ -25,7 +25,16 @@ The local server supports page rewrites. It returns an error for contact submiss
 
 Completed: all six routes' local links/assets and IDs; JavaScript syntax; DOM-based regression checks for the demo ballot, close/reopen behavior, duplicate protection, reset, safe rendering of question text, moderation, speaker queue, tab keyboard controls, and navigation toggle/Escape. No email was sent.
 
-Pending: actual desktop/mobile browser visual inspection, screen-reader testing, and a Vercel preview. The available browser could not open local HTTP or file previews. GitHub rejected branch creation with `Resource not accessible by integration` and Vercel denied access to the existing project. These are access blockers, not successful deployments.
+The GitHub review branch is connected to the existing Vercel project and deploys automatically to Preview. The first preview passed desktop route, image, ballot, Q&A, queue, and reset checks. Mobile-device and screen-reader review remain before merging.
+
+## Editorial revision
+
+- Shortened the homepage to an introduction, two service paths, and customer proof.
+- Kept voting setup and reporting on Electronic Voting; meeting tools and Zoom on Meetings & Events.
+- Moved company history and support choices to About DOTS.
+- Removed repeated logo strips, testimonials, benefit lists, and closing pitches from detail pages.
+- Made the demo start directly at the interaction and shortened its instructions.
+- Simplified contact and footer wording while preserving form fields and behavior.
 
 ## Deployment target
 

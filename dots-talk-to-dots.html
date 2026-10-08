@@ -488,7 +488,7 @@
         <li><a href="/about">About DOTS</a></li>
       </ul>
       <div class="nav-cta">
-        <a class="btn btn--secondary" href="/demo">See DOTS in Action</a>
+        <a class="btn btn--secondary" href="/demo">Try the demo</a>
         <a class="btn btn--primary" href="/talk-to-dots" aria-current="page">Talk to DOTS</a>
       </div>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">Menu</button>
@@ -502,7 +502,7 @@
       <div class="wrap section hero-center" style="padding-bottom: var(--s-6);">
         <p class="eyebrow">Talk to DOTS</p>
         <h1 id="hero-h">Tell us what you&rsquo;re planning.</h1>
-        <p class="lead">Tell us a little about the meeting, event, or vote you&rsquo;re planning. We&rsquo;ll help you choose a confident way to run it, with no pressure and no obligation.</p>
+        <p class="lead">Share your date, approximate attendance, and what you need help with.</p>
       </div>
     </section>
 
@@ -513,26 +513,18 @@
 
         <!-- Aside: reassurance -->
         <aside class="contact-aside">
-          <p class="eyebrow">What happens next</p>
-          <ul class="feature-list">
-            <li><b>A real person reviews your plan</b> &mdash; not a bot, not a queue.</li>
-            <li><b>We reply within one business day</b> &mdash; with useful next steps, not a hard sell.</li>
-            <li><b>We recommend a fitting setup</b> &mdash; self-managed, supported, or fully run by our team.</li>
-          </ul>
-
+          <p>We’ll review your requirements and reply within one business day.</p>
           <div class="contact-alt">
             <p class="eyebrow">Prefer to talk now?</p>
             <p><a href="tel:18333687123">1.833.368.7123</a></p>
             <p><a href="mailto:sales@dataonthespot.com">sales@dataonthespot.com</a></p>
           </div>
-
-          <p class="reassure">You do not need every detail yet. Share what you know, and we&rsquo;ll help you work out the rest from 16+ years of live meeting experience.</p>
         </aside>
 
         <!-- Form -->
         <div class="form-card">
           <form id="talk-form" novalidate>
-            <p class="form-intro">Share what you know. Fields marked <span class="req" aria-hidden="true">*</span> are required.</p>
+            <p class="form-intro">Fields marked <span class="req" aria-hidden="true">*</span> are required.</p>
             <div class="honeypot" aria-hidden="true">
               <label for="website">Website</label>
               <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
@@ -614,7 +606,7 @@
             <div class="form-actions">
               <button type="submit" class="btn btn--primary">Talk to DOTS</button>
               <p class="form-error" id="form-error" role="alert" hidden></p>
-              <p class="form-note">We only ask what helps us respond usefully. Your details are never shared.</p>
+              <p class="form-note">We’ll use these details to respond to your enquiry.</p>
             </div>
           </form>
 
@@ -636,14 +628,14 @@
       <div class="foot-grid">
         <div class="foot-brand">
           <a class="corporate-logo" href="/" aria-label="Data on the Spot"><img src="/dots-logo-full.png" alt="Data on the Spot"></a>
-          <p>A trusted place for unions, associations, and member-based organizations to meet, vote, and engage — self-serve when it makes sense, supported when it matters.</p>
+          <p>Electronic voting and meeting support.</p>
         </div>
         <div class="foot-col">
           <h4>Product</h4>
           <ul>
             <li><a href="/electronic-voting">Electronic Voting</a></li>
             <li><a href="/meetings-and-votes">Meetings &amp; Events</a></li>
-            <li><a href="/demo">See DOTS in Action</a></li>
+            <li><a href="/demo">Try the demo</a></li>
           </ul>
         </div>
         <div class="foot-col">
@@ -664,7 +656,7 @@
       </div>
       <div class="foot-bottom">
         <span>© 2026 Data On The Spot Inc. All rights reserved.</span>
-        <span>Built in real meetings. Ready when it matters.</span>
+
       </div>
     </div>
   </footer>
@@ -729,7 +721,7 @@
         if (!link) return;
         var href = link.getAttribute('href').split(/[?#]/)[0];
         if (href === '/talk-to-dots') track('Talk to DOTS');
-        else if (href === '/demo') track('See DOTS in Action');
+        else if (href === '/demo') track('Try the demo');
         else if (href.indexOf('tel:') === 0) track('Phone Click');
         else if (href.indexOf('mailto:') === 0) track('Email Click');
       });
