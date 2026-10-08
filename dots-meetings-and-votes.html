@@ -13,12 +13,12 @@
   <meta property="og:title" content="Meeting Tools &amp; Zoom Integration | DOTS Connect" />
   <meta property="og:description" content="Agendas, moderated Q&amp;A, speaker queues, resolutions, and Zoom integration for AGMs, conventions, and town halls." />
   <meta property="og:url" content="https://dots-connect-site3.vercel.app/meetings-and-votes" />
-  <meta property="og:image" content="https://dots-connect-site3.vercel.app/hero-devices.png" />
-  <meta property="og:image:alt" content="DOTS Connect supporting a hybrid meeting and member participation." />
+  <meta property="og:image" content="https://dots-connect-site3.vercel.app/v3-member-home.png" />
+  <meta property="og:image:alt" content="DOTS Connect v3 member homepage with demonstration events." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Meeting Tools &amp; Zoom Integration | DOTS Connect" />
   <meta name="twitter:description" content="Agendas, moderated Q&amp;A, speaker queues, resolutions, and Zoom integration for AGMs, conventions, and town halls." />
-  <meta name="twitter:image" content="https://dots-connect-site3.vercel.app/hero-devices.png" />
+  <meta name="twitter:image" content="https://dots-connect-site3.vercel.app/v3-member-home.png" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-QkNLfy0_YkfaKz_PoU41A.js"></script>
   <script>
@@ -167,9 +167,6 @@
     /* Hero product shot — white panel so the white-bg screenshot reads on lavender */
     .hero-shot { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s-3); box-shadow: var(--shadow-md); }
     .hero-shot img { width: 100%; height: auto; border-radius: 10px; display: block; }
-    .hero-shot--photo { aspect-ratio: 4 / 3; padding: 0; background-position: center; background-size: cover; }
-    .hero-shot--photo img { display: none; }
-    .hero-shot--meetings { background-image: url('/hybrid.png'); }
 
     /* ---- Product-forward mock: member portal ---- */
     .portal {
@@ -424,6 +421,7 @@
     }
   </style>
   <link rel="stylesheet" href="/site-navigation.css">
+  <link rel="stylesheet" href="/product-screens.css">
   <script src="/site-navigation.js" defer></script>
 </head>
 <body>
@@ -454,7 +452,7 @@
     <section class="hero-band" aria-labelledby="hero-h">
       <div class="hero wrap"><div class="hero-grid">
         <div class="hero-copy"><p class="eyebrow">Meetings &amp; Events</p><h1 id="hero-h">Keep the agenda moving.</h1><p class="lead">Give delegates the documents, discussion tools, and live ballots they need for an AGM, convention, or town hall.</p></div>
-        <div class="hero-media"><figure class="hero-shot hero-shot--photo hero-shot--meetings"><img src="/hero-devices.png" width="1400" height="660" alt="DOTS Connect meeting tools on a phone, tablet, laptop, and RF clicker." /></figure></div>
+        <div class="hero-media"><figure class="v3-shot v3-agenda-shot"><img src="/v3-member-agenda.png" width="490" height="900" fetchpriority="high" alt="Actual DOTS Connect v3 member agenda with day tabs, session times, and speakers."><figcaption>DOTS Connect v3 · Member agenda · Demo data</figcaption></figure></div>
       </div></div>
     </section>
 
@@ -462,7 +460,7 @@
       <div class="uc-head"><h2 id="tools-h">Four tools for the chair and members.</h2></div>
       <div class="meeting-scenarios">
         <article class="meeting-scenario"><h3>Agenda &amp; documents</h3><p>Publish the schedule, reports, and supporting materials before the meeting. Members can return to them throughout the session.</p></article>
-        <article class="meeting-scenario"><h3>Moderated Q&amp;A</h3><p>Collect questions ahead of time or during the meeting. Hosts review submissions before sharing them with the presenter.</p></article>
+        <article class="meeting-scenario"><h3>Moderated Q&amp;A</h3><p>Collect questions ahead of time or during the meeting. Members see their own questions and browse pinned answers.</p></article>
         <article class="meeting-scenario"><h3>Speaker queue</h3><p>Members request the floor and see their place. The chair calls speakers in order and manages the discussion.</p></article>
         <article class="meeting-scenario"><h3>Resolutions &amp; amendments</h3><p>Show the full text under consideration and track proposed amendments as business moves through debate and voting.</p></article>
       </div>
@@ -472,7 +470,7 @@
     <section class="band-lav" aria-labelledby="zoom-h">
       <div class="wrap section split">
         <div><p class="eyebrow">Hybrid meetings</p><h2 id="zoom-h">Join Zoom inside DOTS Connect.</h2><p class="lead">Remote participants access the video meeting alongside the agenda and participation tools. People in the room use their own devices or RF clickers.</p><p style="margin-top:20px">Need help with delivery? <a href="/about#support">Explore DOTS support options.</a></p></div>
-        <figure class="hero-shot"><img src="/dots-devices.png" loading="lazy" alt="Zoom video beside a DOTS Connect ballot, with the meeting also shown on a phone and tablet." /></figure>
+        <div class="v3-screen-pair"><figure class="v3-shot"><img src="/v3-member-documents.png" width="490" height="540" loading="lazy" alt="DOTS Connect v3 member document folders for reports, convention papers, elections, and resolutions."><figcaption>Meeting documents</figcaption></figure><figure class="v3-shot"><img src="/v3-member-questions.png" width="936" height="934" loading="lazy" alt="A member question with its answer in DOTS Connect v3."><figcaption>Your questions and answers</figcaption></figure><p>Actual v3 member screens · Demo data</p></div>
       </div>
     </section>
 

@@ -13,12 +13,12 @@
   <meta property="og:title" content="Electronic Voting | DOTS Connect" />
   <meta property="og:description" content="Plan elections, strike votes, and ratification with voter eligibility, practice ballots, participation records, and results reporting." />
   <meta property="og:url" content="https://dots-connect-site3.vercel.app/electronic-voting" />
-  <meta property="og:image" content="https://dots-connect-site3.vercel.app/dots-connect.png" />
-  <meta property="og:image:alt" content="DOTS Connect secure voting on a phone and tablet." />
+  <meta property="og:image" content="https://dots-connect-site3.vercel.app/v3-member-home.png" />
+  <meta property="og:image:alt" content="DOTS Connect v3 member homepage with demonstration events." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Electronic Voting | DOTS Connect" />
   <meta name="twitter:description" content="Plan elections, strike votes, and ratification with voter eligibility, practice ballots, participation records, and results reporting." />
-  <meta name="twitter:image" content="https://dots-connect-site3.vercel.app/dots-connect.png" />
+  <meta name="twitter:image" content="https://dots-connect-site3.vercel.app/v3-member-home.png" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-QkNLfy0_YkfaKz_PoU41A.js"></script>
   <script>
@@ -167,9 +167,6 @@
     /* Hero product shot — white panel so the white-bg screenshot reads on lavender */
     .hero-shot { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--s-3); box-shadow: var(--shadow-md); }
     .hero-shot img { width: 100%; height: auto; border-radius: 10px; display: block; }
-    .hero-shot--photo { aspect-ratio: 4 / 3; padding: 0; background-position: center; background-size: cover; }
-    .hero-shot--photo img { display: none; }
-    .hero-shot--voting { background-image: url('/connect-meeting.jpg'); }
 
     /* ---- Product-forward mock: member portal ---- */
     .portal {
@@ -421,6 +418,7 @@
     }
   </style>
   <link rel="stylesheet" href="/site-navigation.css">
+  <link rel="stylesheet" href="/product-screens.css">
   <script src="/site-navigation.js" defer></script>
 </head>
 <body>
@@ -457,7 +455,7 @@
           <div class="hero-actions"><a class="btn btn--primary" href="/demo#tour">Try a sample ballot</a></div>
           <p class="proof-line">Vote on a phone, tablet, or computer. RF clickers are available for in-person events.</p>
         </div>
-        <div class="hero-media"><figure class="hero-shot hero-shot--photo hero-shot--voting"><img src="/dots-connect.png" width="1000" height="750" alt="A member using a DOTS Connect ballot on a laptop and phone." /></figure></div>
+        <div class="hero-media"><figure class="v3-shot v3-ballot-shot"><img src="/v3-member-ballot.png" width="490" height="900" fetchpriority="high" alt="Actual v3 member ballot with In favour, Opposed, Abstain, and Review ballot. Test description redacted in the source screenshot."><figcaption>DOTS Connect v3 · Sample ballot</figcaption></figure></div>
       </div></div>
     </section>
 

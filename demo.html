@@ -4,21 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#2E3192" />
-  <title>Try the Demo | DOTS Connect</title>
-  <meta name="description" content="Try a sample ballot, moderated question, and speaker queue. An interactive DOTS Connect example with no account needed." />
+  <title>Try the Member Demo | DOTS Connect</title>
+  <meta name="description" content="Explore the DOTS Connect v3 member experience. Try a ballot, ask a question, join the queue, and browse meeting materials. No account needed." />
   <link rel="canonical" href="https://dots-connect-site3.vercel.app/demo" />
   <meta name="robots" content="index, follow" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="DOTS" />
-  <meta property="og:title" content="Try the Demo | DOTS Connect" />
-  <meta property="og:description" content="Try a sample ballot, moderated question, and speaker queue. An interactive DOTS Connect example with no account needed." />
+  <meta property="og:title" content="Try the Member Demo | DOTS Connect" />
+  <meta property="og:description" content="Electronic voting and meeting support." />
   <meta property="og:url" content="https://dots-connect-site3.vercel.app/demo" />
-  <meta property="og:image" content="https://dots-connect-site3.vercel.app/hero-devices.png" />
-  <meta property="og:image:alt" content="DOTS Connect supporting a live meeting, secure voting, and participation." />
+  <meta property="og:image" content="https://dots-connect-site3.vercel.app/v3-member-home.png" />
+  <meta property="og:image:alt" content="DOTS Connect v3 member homepage with demonstration events." />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Try the Demo | DOTS Connect" />
-  <meta name="twitter:description" content="Try a sample ballot, moderated question, and speaker queue. An interactive DOTS Connect example with no account needed." />
-  <meta name="twitter:image" content="https://dots-connect-site3.vercel.app/hero-devices.png" />
+  <meta name="twitter:title" content="Try the Member Demo | DOTS Connect" />
+  <meta name="twitter:description" content="Electronic voting and meeting support." />
+  <meta name="twitter:image" content="https://dots-connect-site3.vercel.app/v3-member-home.png" />
   <!-- Privacy-friendly analytics by Plausible -->
   <script async src="https://plausible.io/js/pa-QkNLfy0_YkfaKz_PoU41A.js"></script>
   <script>
@@ -26,392 +26,123 @@
     plausible.init = plausible.init || function (options) { plausible.o = options || {}; };
     plausible.init();
   </script>
-  <style>
-    :root {
-      --navy: #2E3192;
-      --navy-2: #23266F;
-      --peri: #A3ADE8;
-      --lav: #F1F4FB;
-      --lav-2: #E5EAF7;
-      --ink: #1A1D33;
-      --muted: #5B6075;
-      --line: #E2E5F2;
-      --green: #17823B;
-      --green-bg: #E8F6EC;
-      --blue: #1464C8;
-      --blue-bg: #EAF3FF;
-      --orange: #B85E11;
-      --orange-bg: #FFF1E5;
-      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --maxw: 1120px;
-      --s-1: .5rem; --s-2: .75rem; --s-3: 1rem; --s-4: 1.5rem;
-      --s-5: 2rem; --s-6: 3rem; --s-7: 4rem; --s-8: 6rem;
-      --fs-display: clamp(2.25rem, 4.7vw, 3.65rem);
-      --fs-h2: clamp(1.7rem, 3vw, 2.35rem);
-      --fs-lead: clamp(1.05rem, 1.4vw, 1.25rem);
-      --fs-small: .9375rem;
-      --radius: 8px;
-      --shadow: 0 16px 36px -20px rgba(26,29,51,.22);
-    }
-
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
-    body { margin: 0; background: #fff; color: var(--ink); font: 1.0625rem/1.55 var(--font); -webkit-font-smoothing: antialiased; }
-    h1, h2, h3, p { margin: 0; }
-    h1, h2, h3 { line-height: 1.15; letter-spacing: 0; }
-    a { color: inherit; text-decoration: none; }
-    a:hover { text-decoration: none; }
-    button, input, textarea { font: inherit; }
-    button { cursor: pointer; }
-    img { display: block; max-width: 100%; }
-    .wrap { width: min(100%, var(--maxw)); margin: 0 auto; padding-inline: var(--s-4); }
-    .section { padding-block: var(--s-8); }
-    .eyebrow { margin-bottom: var(--s-2); color: var(--navy-2); font-size: .8125rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
-    .lead { color: var(--muted); font-size: var(--fs-lead); line-height: 1.55; }
-    .skip { position: absolute; top: 0; left: -999px; z-index: 100; padding: var(--s-2) var(--s-3); border-radius: 0 0 8px 0; background: var(--navy); color: #fff; }
-    .skip:focus { left: 0; }
-    :focus-visible { outline: 3px solid var(--peri); outline-offset: 3px; }
-
-    .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.94); backdrop-filter: blur(12px); }
-    .nav { position: relative; display: flex; align-items: center; gap: var(--s-4); min-height: 60px; }
-    .brand { display: inline-flex; align-items: center; gap: .35rem; color: var(--ink); font-size: 1.3rem; font-weight: 800; }
-    .brand-logo { display: block; width: 44px; height: auto; }
-    .brand .dot { color: var(--navy); }
-    .brand .tag { color: var(--muted); font-size: .68rem; font-weight: 600; letter-spacing: 0; white-space: nowrap; }
-    .nav-links { display: flex; gap: var(--s-4); margin: 0 0 0 auto; padding: 0; list-style: none; }
-    .nav-links a { color: var(--ink); font-size: var(--fs-small); font-weight: 550; }
-    .nav-links a:hover { color: var(--navy-2); }
-    .nav-actions { display: flex; gap: var(--s-2); align-items: center; }
-    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 42px; padding: .65em 1em; border: 1px solid transparent; border-radius: 8px; font-weight: 700; white-space: nowrap; }
-    .btn-primary { background: var(--navy); color: #fff; }
-    .btn-primary:hover { background: var(--navy-2); }
-    .btn-secondary { border-color: var(--peri); background: #fff; color: var(--navy-2); }
-    .btn-secondary:hover { border-color: var(--navy); background: var(--lav); }
-    .nav-toggle { display: none; min-height: 40px; padding: .45rem .7rem; border: 1px solid var(--line); border-radius: 8px; background: var(--lav); color: var(--navy-2); font-weight: 700; }
-
-    .hero-band { border-bottom: 1px solid var(--line); background: var(--lav); }
-    .hero { display: grid; grid-template-columns: 1fr .92fr; align-items: center; gap: var(--s-7); min-height: 500px; padding-block: var(--s-7); }
-    .hero-copy h1 { max-width: 13ch; font-size: var(--fs-display); }
-    .hero-copy .lead { max-width: 48ch; margin-top: var(--s-3); }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-5); }
-    .hero-proof { margin-top: var(--s-4); color: var(--muted); font-size: var(--fs-small); }
-    .hero-media { align-self: end; }
-    .hero-media img { width: 100%; filter: drop-shadow(0 18px 26px rgba(26,29,51,.16)); }
-
-    .tour-head { max-width: 56ch; margin-bottom: var(--s-5); }
-    .tour-head h2 { font-size: var(--fs-h2); }
-    .tour-head .lead { margin-top: var(--s-3); }
-    .tour-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: .25rem; width: min(100%, 660px); margin-bottom: var(--s-5); padding: .25rem; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: var(--shadow); }
-    .tour-tab { min-height: 48px; padding: .6rem .85rem; border: 0; border-radius: 6px; background: transparent; color: var(--muted); font-size: var(--fs-small); font-weight: 750; }
-    .tour-tab[aria-selected="true"] { background: var(--navy); color: #fff; }
-    .demo-shell { overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: var(--shadow); }
-    .demo-banner { display: flex; justify-content: space-between; gap: var(--s-3); padding: var(--s-3) var(--s-4); border-bottom: 1px solid var(--line); background: #fbfbfe; color: var(--muted); font-size: var(--fs-small); }
-    .demo-banner strong { color: var(--ink); }
-    .demo-panel[hidden] { display: none; }
-    .demo-panel { display: grid; grid-template-columns: 1.15fr .85fr; min-height: 560px; }
-    .host { padding: var(--s-5); border-right: 1px solid var(--line); }
-    .member-side { display: grid; align-content: center; justify-items: center; padding: var(--s-5); background: #f8f8fc; }
-    .surface-label { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); margin-bottom: var(--s-4); color: var(--muted); font-size: var(--fs-small); }
-    .surface-label strong { color: var(--ink); font-size: 1rem; }
-    .live-dot { display: inline-flex; align-items: center; gap: .45rem; color: var(--green); font-weight: 700; }
-    .live-dot::before { width: .55rem; height: .55rem; border-radius: 50%; background: currentColor; content: ""; }
-    .console-title { margin-bottom: var(--s-4); }
-    .console-title h3 { font-size: 1.45rem; }
-    .console-title p { margin-top: .25rem; color: var(--muted); font-size: var(--fs-small); }
-    .meeting-row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--s-3); padding: var(--s-4); border-top: 1px solid var(--line); }
-    .meeting-row:last-child { border-bottom: 1px solid var(--line); }
-    .meeting-row h4 { margin: 0; font-size: 1rem; }
-    .meeting-row p { margin: .2rem 0 0; color: var(--muted); font-size: var(--fs-small); }
-    .action { min-height: 38px; padding: .5em .8em; border: 1px solid var(--peri); border-radius: 6px; background: #fff; color: var(--navy-2); font-size: var(--fs-small); font-weight: 750; }
-    .action:hover { border-color: var(--navy); background: var(--lav); }
-    .action:disabled { cursor: not-allowed; opacity: .52; }
-    .admin-status { display: flex; align-items: center; gap: .5rem; min-height: 46px; margin-top: var(--s-4); padding: .7rem .85rem; border: 1px solid var(--line); border-radius: 6px; color: var(--muted); font-size: var(--fs-small); }
-    .admin-status.is-live { border-color: #BDE6C7; background: var(--green-bg); color: var(--green); }
-    .admin-status.is-action { border-color: #BAD7FB; background: var(--blue-bg); color: var(--blue); }
-    .admin-status.is-queue { border-color: #F3D4B7; background: var(--orange-bg); color: var(--orange); }
-    .result-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-2); margin-top: var(--s-4); }
-    .result-summary div { padding: var(--s-3); border: 1px solid var(--line); border-radius: 6px; background: #fbfbfe; }
-    .result-summary span { display: block; color: var(--muted); font-size: .75rem; font-weight: 700; text-transform: uppercase; }
-    .result-summary strong { display: block; margin-top: .2rem; color: var(--ink); font-size: 1.25rem; }
-    .question-list, .queue-list { margin: 0; padding: 0; list-style: none; }
-    .question-list li, .queue-list li { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); padding: var(--s-3); border-top: 1px solid var(--line); color: var(--ink); font-size: var(--fs-small); }
-    .question-list li:last-child, .queue-list li:last-child { border-bottom: 1px solid var(--line); }
-    .pill { display: inline-flex; min-width: 2.1rem; justify-content: center; padding: .15rem .45rem; border-radius: 999px; background: var(--lav); color: var(--navy-2); font-size: .75rem; font-weight: 800; }
-    .empty { padding: var(--s-4); border: 1px dashed var(--line); border-radius: 6px; color: var(--muted); font-size: var(--fs-small); text-align: center; }
-
-    .phone { width: min(100%, 310px); overflow: hidden; border: 8px solid var(--ink); border-radius: 30px; background: #fff; box-shadow: 0 16px 34px -18px rgba(26,29,51,.36); }
-    .phone-top { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: .5rem .85rem; border-bottom: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
-    .phone-top strong { color: var(--ink); font-size: .78rem; }
-    .phone-body { min-height: 390px; padding: var(--s-4); }
-    .phone-body h4 { margin: 0; font-size: 1.15rem; }
-    .phone-body p { margin-top: .35rem; color: var(--muted); font-size: var(--fs-small); }
-    .phone-status { display: inline-flex; align-items: center; gap: .4rem; margin-top: var(--s-3); color: var(--green); font-size: .75rem; font-weight: 750; }
-    .phone-status::before { width: .5rem; height: .5rem; border-radius: 50%; background: currentColor; content: ""; }
-    .member-question { margin-top: var(--s-4); padding: var(--s-3); border: 1px solid var(--line); border-radius: 6px; color: var(--ink); font-size: var(--fs-small); font-weight: 700; }
-    .choice-list { display: grid; gap: var(--s-2); margin-top: var(--s-3); }
-    .choice { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: .65rem .8rem; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink); font-size: var(--fs-small); font-weight: 700; text-align: left; }
-    .choice::after { width: 1rem; height: 1rem; border: 1.5px solid currentColor; border-radius: 50%; content: ""; }
-    .choice:hover:not(:disabled) { border-color: var(--navy); color: var(--navy-2); }
-    .choice.is-selected { border-color: var(--green); background: var(--green-bg); color: var(--green); }
-    .choice.is-selected::after { background: currentColor; box-shadow: inset 0 0 0 3px var(--green-bg); }
-    .member-confirmation { margin-top: var(--s-3); padding: .7rem .8rem; border: 1px solid #BDE6C7; border-radius: 6px; background: var(--green-bg); color: var(--green); font-size: var(--fs-small); font-weight: 700; }
-    .member-confirmation[hidden] { display: none; }
-    .member-textarea { width: 100%; min-height: 92px; margin-top: var(--s-3); padding: .7rem; border: 1px solid var(--line); border-radius: 6px; resize: vertical; color: var(--ink); font-size: var(--fs-small); }
-    .member-submit, .raise-hand { width: 100%; min-height: 42px; margin-top: var(--s-2); border: 0; border-radius: 6px; background: var(--navy); color: #fff; font-size: var(--fs-small); font-weight: 800; }
-    .member-submit:disabled, .raise-hand:disabled { cursor: not-allowed; opacity: .48; }
-    .member-list { margin-top: var(--s-3); }
-    .member-list div { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); padding: .65rem 0; border-bottom: 1px solid var(--line); color: var(--muted); font-size: var(--fs-small); }
-    .member-list strong { color: var(--ink); }
-    .member-nav { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: var(--s-4); border-top: 1px solid var(--line); }
-    .member-nav span { padding: .7rem .2rem; color: var(--muted); font-size: .68rem; font-weight: 700; text-align: center; }
-    .member-nav span.is-active { color: var(--navy-2); }
-    .member-caption { max-width: 30ch; margin-top: var(--s-3); color: var(--muted); font-size: var(--fs-small); text-align: center; }
-    .tour-reset { display: inline-flex; margin-top: var(--s-4); padding: 0; border: 0; background: transparent; color: var(--navy-2); font-size: var(--fs-small); font-weight: 750; }
-    .tour-reset:hover { color: var(--navy); text-decoration: underline; }
-
-    .principles { background: var(--lav); }
-    .principles-head { max-width: 56ch; }
-    .principles-head h2 { font-size: var(--fs-h2); }
-    .principles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); margin-top: var(--s-5); }
-    .principle { padding-top: var(--s-3); border-top: 3px solid var(--peri); }
-    .principle h3 { font-size: 1.1rem; }
-    .principle p { margin-top: .5rem; color: var(--muted); font-size: var(--fs-small); }
-    .final { text-align: center; }
-    .final h2 { font-size: var(--fs-h2); }
-    .final p { max-width: 54ch; margin: var(--s-3) auto 0; color: var(--muted); font-size: var(--fs-lead); }
-    .final .hero-actions { justify-content: center; }
-    .site-footer { border-top: 1px solid var(--line); padding-block: var(--s-6) var(--s-4); }
-    .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: var(--s-5); }
-    .footer-brand p { max-width: 34ch; margin-top: var(--s-2); color: var(--muted); font-size: var(--fs-small); }
-    .footer-col h3 { color: var(--muted); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; }
-    .footer-col ul { display: grid; gap: .5rem; margin: var(--s-2) 0 0; padding: 0; list-style: none; }
-    .footer-col a { color: var(--ink); font-size: var(--fs-small); }
-    .footer-col a:hover { color: var(--navy-2); }
-    .footer-bottom { display: flex; justify-content: space-between; gap: var(--s-3); margin-top: var(--s-5); padding-top: var(--s-3); border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; gap: var(--s-4); min-height: 0; }
-      .hero-copy h1 { max-width: 16ch; }
-      .hero-media { max-width: 620px; margin-inline: auto; }
-      .demo-panel { grid-template-columns: 1fr; }
-      .host { border-right: 0; border-bottom: 1px solid var(--line); }
-      .member-side { padding-block: var(--s-6); }
-      .nav { gap: var(--s-2); }
-      .brand .tag, .nav-links, .nav-actions .btn-secondary { display: none; }
-      .nav-links.is-open {
-        position: absolute;
-        z-index: 20;
-        top: 56px;
-        right: 0;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: var(--s-2);
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--white);
-        box-shadow: 0 14px 30px rgba(25, 27, 53, .12);
-      }
-      .nav-links.is-open a { padding: 12px; }
-      .nav-actions { margin-left: auto; }
-      .nav-actions .btn-primary { min-height: 40px; font-size: var(--fs-small); }
-      .nav-toggle { display: inline-flex; }
-    }
-    @media (max-width: 700px) {
-      :root { --s-8: 4rem; --s-7: 3rem; }
-      .nav { gap: var(--s-2); }
-      .brand .tag, .nav-links, .nav-actions .btn-secondary { display: none; }
-      .nav-links.is-open {
-        position: absolute;
-        z-index: 20;
-        top: 56px;
-        right: 0;
-        left: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: var(--s-2);
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--white);
-        box-shadow: 0 14px 30px rgba(25, 27, 53, .12);
-      }
-      .nav-links.is-open a { padding: 12px; }
-      .nav-actions { margin-left: auto; }
-      .nav-actions .btn-primary { min-height: 40px; font-size: var(--fs-small); }
-      .nav-toggle { display: inline-flex; }
-      .tour-tabs { gap: .15rem; }
-      .tour-tab { min-height: 52px; padding-inline: .35rem; font-size: .78rem; }
-      .demo-banner { align-items: flex-start; flex-direction: column; }
-      .host, .member-side { padding: var(--s-4); }
-      .meeting-row { grid-template-columns: 1fr; }
-      .meeting-row .action { justify-self: start; }
-      .principles-grid, .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { align-items: flex-start; flex-direction: column; }
-    }
-  </style>
+  <link rel="stylesheet" href="/home.css">
   <link rel="stylesheet" href="/site-navigation.css">
+  <link rel="stylesheet" href="/product-screens.css">
   <script src="/site-navigation.js" defer></script>
   <link rel="stylesheet" href="/demo-tour.css">
   <script src="/demo-tour.js" defer></script>
 </head>
 <body>
-  <a class="skip" href="#tour">Skip to interactive tour</a>
+  <a class="skip" href="#main">Skip to member demo</a>
   <header class="site-header">
     <nav class="wrap nav" aria-label="Primary">
-      <a class="brand" href="/"><img class="brand-logo" src="/dots-logo-full.png" alt="Data on the Spot"><span class="tag">Meet &middot; Vote &middot; Engage</span></a>
+      <a class="brand" href="/">
+        <img class="brand-logo" src="/dots-logo-full.png" alt="Data on the Spot">
+        <span class="tag">Meet · Vote · Engage</span>
+      </a>
       <ul class="nav-links" id="site-navigation">
         <li><a href="/electronic-voting">Electronic Voting</a></li>
         <li><a href="/meetings-and-votes">Meetings &amp; Events</a></li>
         <li class="mobile-tour"><a href="/demo">Try the interactive demo</a></li>
         <li><a href="/about">About DOTS</a></li>
       </ul>
-      <div class="nav-actions">
-        <a class="btn btn-secondary" href="/demo" aria-current="page">Try the demo</a>
-        <a class="btn btn-primary" href="/talk-to-dots">Talk to DOTS</a>
+      <div class="nav-cta">
+        <a class="btn btn--secondary" href="/demo">Try the demo</a>
+        <a class="btn btn--primary" href="/talk-to-dots">Talk to DOTS</a>
       </div>
-      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">Menu</button>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="site-navigation">Menu</button>
     </nav>
   </header>
 
-  <main>
 
-
-    <section class="section wrap" id="tour" aria-labelledby="tour-title">
-      <div class="tour-head">
-        <p class="eyebrow">Interactive demo</p>
-        <h1 id="tour-title">Try DOTS Connect.</h1>
-        <p class="lead">Cast a sample ballot, ask a question, or join the speaker queue. No account needed.</p>
-      </div>
-
-      <div class="tour-tabs" role="tablist" aria-label="DOTS Connect tour modes">
-        <button class="tour-tab" type="button" role="tab" aria-selected="true" aria-controls="voting-panel" id="voting-tab" data-tab="voting">Voting</button>
-        <button class="tour-tab" type="button" role="tab" aria-selected="false" aria-controls="qa-panel" id="qa-tab" data-tab="qa">Moderated Q&amp;A</button>
-        <button class="tour-tab" type="button" role="tab" aria-selected="false" aria-controls="queue-panel" id="queue-tab" data-tab="queue">Speaker Queue</button>
-      </div>
-
-      <div class="demo-shell">
-        <div class="demo-banner"><span><strong>DOTS Connect</strong> &middot; Annual General Meeting 2026</span><span>Interactive example</span></div>
-
-        <section class="demo-panel" id="voting-panel" role="tabpanel" aria-labelledby="voting-tab">
-<div class="member-side">
-            <div class="phone" aria-label="Member voting view">
-              <div class="phone-top"><strong>dotsconnect.live</strong><span>Secure vote</span></div>
-              <div class="phone-body">
-                <h4>Annual General Meeting</h4><p>Live vote</p>
-                <span class="phone-status" id="vote-member-state">Waiting for the host</span>
-                <div class="member-question">Approve the 2025 financial statements?</div>
-                <p class="vote-progress" id="vote-progress" aria-live="polite"></p>
-                <div class="choice-list" id="vote-choices">
-                  <button class="choice vote-choice" type="button" data-choice="yes" disabled>Yes</button>
-                  <button class="choice vote-choice" type="button" data-choice="no" disabled>No</button>
-                  <button class="choice vote-choice" type="button" data-choice="abstain" disabled>Abstain</button>
-                </div>
-                <button class="member-submit" type="button" id="vote-review-button" disabled>Review vote</button>
-                <div class="vote-review" id="vote-review" hidden><p>Your selection</p><strong id="vote-review-choice"></strong><p>Check your choice before submitting.</p><button class="member-submit" type="button" id="vote-submit">Submit sample vote</button><button class="action" type="button" id="vote-change">Change selection</button></div>
-                <p class="member-confirmation" id="vote-confirmation" role="status" tabindex="-1" hidden>Your sample vote has been recorded. Thank you for taking part.</p>
-                <div class="member-nav"><span>Agenda</span><span class="is-active">Vote</span><span>Q&amp;A</span></div>
-              </div>
+  <main id="main">
+    <section class="wrap demo-section" id="tour" aria-labelledby="tour-title">
+      <div class="demo-intro"><div><p class="eyebrow">The member experience</p><h1 id="tour-title">Take your seat.</h1><p class="lead">Vote, ask, and take part. Explore the version 3 member layout—no account needed.</p></div><button class="demo-reset" id="tour-reset" type="button">Reset demo <span aria-hidden="true">↺</span></button></div>
+      <noscript><p class="demo-notice">Enable JavaScript to try the interactions. You can still <a href="/v3-member-ballot.png">view the actual member ballot screen</a>.</p></noscript>
+      <div class="member-app" id="member-app">
+        <div class="app-topbar"><button class="app-home" id="member-home" type="button" aria-label="Back to your meetings"><span class="connect-mark" aria-hidden="true"></span><span>DOTS Connect</span></button><span class="sample-badge">Member demo</span><span class="member-avatar" aria-label="Demo member">J</span></div>
+        <section class="member-portal" id="member-portal" aria-labelledby="portal-title" hidden>
+          <p class="app-muted">Your meetings</p><h2 id="portal-title" tabindex="-1">Hi, Jordan</h2><p class="live-label"><span></span> Live now</p>
+          <button class="event-card" id="open-event" type="button"><span class="event-card-label">Demo association</span><strong>Annual member meeting</strong><span>Online · Sample event</span><span class="event-open">Open event <span aria-hidden="true">↗</span></span></button>
+        </section>
+        <div class="event-workspace" id="event-workspace">
+          <div class="event-context"><p class="live-label"><span></span> Sample event</p><h2>Annual member<br>meeting</h2><p class="event-welcome">Welcome, Jordan.<br>Your meeting tools are ready.</p><div class="meeting-outline"><p class="app-overline">Today’s meeting</p><p>Welcome &amp; opening remarks</p><p>Reports &amp; member questions</p><p>Discussion &amp; voting</p></div><p class="event-hint">Start with a ballot, or explore the tabs.</p></div>
+          <div class="member-tools">
+            <div class="member-tabs" role="tablist" aria-label="Member meeting tools">
+              <button type="button" role="tab" id="agenda-tab" aria-controls="agenda-panel" aria-selected="false" tabindex="-1" data-tab="agenda"><span aria-hidden="true">▦</span>Agenda</button>
+              <button type="button" role="tab" id="docs-tab" aria-controls="docs-panel" aria-selected="false" tabindex="-1" data-tab="docs"><span aria-hidden="true">▤</span>Docs</button>
+              <button type="button" role="tab" id="queue-tab" aria-controls="queue-panel" aria-selected="false" tabindex="-1" data-tab="queue"><span aria-hidden="true">☷</span>Queue</button>
+              <button type="button" role="tab" id="qa-tab" aria-controls="qa-panel" aria-selected="false" tabindex="-1" data-tab="qa"><span aria-hidden="true">◌</span>Q&amp;A</button>
+              <button type="button" role="tab" id="voting-tab" aria-controls="voting-panel" aria-selected="true" tabindex="0" data-tab="voting"><span aria-hidden="true">☑</span>Vote</button>
             </div>
+            <section class="tool-panel" id="voting-panel" role="tabpanel" aria-labelledby="voting-tab" tabindex="0">
+              <h2>Vote</h2>
+              <div id="vote-select"><p class="ballot-name">Approve the meeting agenda</p><p class="app-overline">Question 1 of 1</p><h3>Shall the agenda be adopted?</h3><p class="app-muted">Select one option</p><div class="ballot-choices" role="group" aria-label="Ballot choices"><button class="vote-choice choice-favour" type="button" data-choice="yes" aria-pressed="false"><span class="choice-radio" aria-hidden="true"></span>In favour</button><button class="vote-choice choice-opposed" type="button" data-choice="no" aria-pressed="false"><span class="choice-radio" aria-hidden="true"></span>Opposed</button><button class="vote-choice" type="button" data-choice="abstain" aria-pressed="false"><span class="choice-radio" aria-hidden="true"></span>Abstain</button></div><div class="ballot-bottom"><button type="button" class="app-primary" id="vote-review-button" disabled>Review ballot</button><p class="app-footnote">Sample ballot · Nothing has been submitted</p></div></div>
+              <div id="vote-review" hidden><h3 tabindex="-1" id="review-heading">Review your votes</h3><p class="app-muted">You are submitting 1 answer for this ballot.</p><div class="app-card review-card"><p>Approve the meeting agenda</p><hr><span class="app-muted">Shall the agenda be adopted?</span><strong id="vote-review-choice"></strong></div><button type="button" class="app-secondary" id="vote-change">Edit answers</button><div class="ballot-bottom"><p class="app-footnote">This is the final step for this sample ballot.</p><button type="button" class="app-primary" id="vote-submit">Cast ballot</button></div></div>
+              <div id="vote-confirmation" class="vote-confirmation" tabindex="-1" role="status" hidden><span class="success-symbol" aria-hidden="true">✓</span><h3>Votes submitted</h3><p>Your sample ballot was recorded.</p><div class="app-card"><span>Approve the meeting agenda</span><strong>Demo receipt: SAMPLE-001</strong></div><p class="app-footnote">This demo does not cast a real vote.</p></div>
+              <a class="screen-reference" href="/v3-member-ballot.png" target="_blank" rel="noopener">View actual v3 ballot screen ↗</a>
+            </section>
+            <section class="tool-panel" id="qa-panel" role="tabpanel" aria-labelledby="qa-tab" tabindex="0" hidden>
+              <h2>Ask a question</h2><button class="ask-question" id="qa-start" type="button" aria-expanded="false" aria-controls="qa-form"><span aria-hidden="true">＋</span> Ask a question</button>
+              <form id="qa-form" hidden><label for="qa-input">Your sample question</label><textarea id="qa-input" maxlength="280" rows="3" required placeholder="What would you like to ask?"></textarea><p class="app-footnote">Use sample text; do not enter personal details.</p><div class="form-actions"><button class="app-primary" id="qa-submit" type="submit" disabled>Submit question</button><button class="app-secondary" id="qa-cancel" type="button">Cancel</button></div></form>
+              <div class="qa-tabs" role="tablist" aria-label="Questions"><button id="your-questions-tab" role="tab" aria-selected="true" aria-controls="your-questions" data-qa-tab="your" type="button">Your questions</button><button id="pinned-questions-tab" role="tab" aria-selected="false" aria-controls="pinned-questions" tabindex="-1" data-qa-tab="pinned" type="button">Pinned questions</button></div>
+              <div id="your-questions" role="tabpanel" aria-labelledby="your-questions-tab" tabindex="0"><article class="app-card" id="qa-new-question" hidden><p class="question-byline">You · Just now</p><p id="qa-question-text"></p><p class="pending-label" id="qa-confirmation" role="status" tabindex="-1">Waiting for a response</p><p class="app-footnote">No one receives questions in this demo.</p></article><article class="app-card"><p class="question-byline">You · Sample question</p><p>Where can I find the meeting papers?</p><details class="question-answer"><summary>Show response</summary><p>Open Docs to browse the meeting documents.</p></details></article></div>
+              <div id="pinned-questions" role="tabpanel" aria-labelledby="pinned-questions-tab" tabindex="0" hidden><article class="app-card"><p class="question-byline">Pinned · Sample answer</p><p>How do I speak during the meeting?</p><details class="question-answer"><summary>Show response</summary><p>Open Queue, select Request to speak, and wait for the chair to call your name.</p></details></article></div>
+              <a class="screen-reference" href="/v3-member-questions.png" target="_blank" rel="noopener">View actual v3 Q&amp;A screen ↗</a>
+            </section>
+            <section class="tool-panel" id="queue-panel" role="tabpanel" aria-labelledby="queue-tab" tabindex="0" hidden>
+              <h2>Queue</h2><div class="app-card"><p class="question-byline">Now speaking</p><p>Meeting chair</p></div><div class="app-card"><p class="question-byline">Your request</p><p id="queue-status" role="status">The queue is open for speaker requests.</p><button class="app-primary" id="raise-hand" type="button">Request to speak</button><button class="app-secondary" id="leave-queue" type="button" hidden>Leave queue</button></div><h3 class="small-heading">Speaker order</h3><p class="app-card app-muted" id="queue-empty">No one is waiting yet</p><ol class="speaker-order" id="speaker-order" hidden><li><span class="queue-number">1</span><span>Jordan <small>You · Waiting to speak</small></span></li></ol><p class="app-footnote">Sample queue. In a meeting, the chair calls your turn.</p>
+            </section>
+            <section class="tool-panel" id="agenda-panel" role="tabpanel" aria-labelledby="agenda-tab" tabindex="0" hidden>
+              <h2>Agenda</h2><p class="day-pill">Today</p><div class="agenda-date"><span>Annual member meeting</span><span>3 sessions</span></div><ol class="agenda-list"><li><time>9:00 AM</time><div class="app-card"><h3>Welcome &amp; opening remarks</h3><p class="up-next">● Up next</p><p>Until 9:15 AM</p></div></li><li><time>9:15 AM</time><div class="app-card"><h3>Reports &amp; member questions</h3><p>Until 9:45 AM</p></div></li><li><time>9:45 AM</time><div class="app-card"><h3>Discussion &amp; voting</h3><p>Until 10:30 AM</p></div></li></ol><a class="screen-reference" href="/v3-member-agenda.png" target="_blank" rel="noopener">View actual v3 agenda screen ↗</a>
+            </section>
+            <section class="tool-panel" id="docs-panel" role="tabpanel" aria-labelledby="docs-tab" tabindex="0" hidden>
+              <h2>Documents</h2><p class="day-pill">Event files</p><div class="document-folders"><details><summary><span aria-hidden="true">▰</span> Meeting papers</summary><button type="button" class="document-link" id="open-document">Annual meeting agenda <span>View sample →</span></button></details><details><summary><span aria-hidden="true">▰</span> Reports</summary><p>No files in this sample folder.</p></details><details><summary><span aria-hidden="true">▰</span> Resolutions</summary><p>No files in this sample folder.</p></details></div><article class="sample-document" id="sample-document" tabindex="-1" hidden><div><p class="app-overline">Sample document</p><button type="button" id="close-document" aria-label="Close sample document">×</button></div><h3>Annual meeting agenda</h3><ol><li>Welcome &amp; opening remarks</li><li>Reports &amp; member questions</li><li>Discussion &amp; voting</li></ol></article><a class="screen-reference" href="/v3-member-documents.png" target="_blank" rel="noopener">View actual v3 documents screen ↗</a>
+            </section>
           </div>
-<div class="member-guide"><h3>Try a sample ballot.</h3><p>Choose Yes, No, or Abstain, then review and submit.</p><p class="guide-note">After voting, use the organizer controls to close the ballot and reveal the sample totals.</p><details class="host"><summary>Explore organizer controls (optional)</summary><div class="host-content">
-            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
-            <div class="console-title"><h3>Live voting</h3><p>Open a motion when the meeting is ready to decide.</p></div>
-            <div class="meeting-row"><div><h4>Approve the 2025 financial statements</h4><p>Single choice &middot; secret ballot</p></div><button class="action" type="button" id="vote-toggle">Open vote</button></div>
-            <div class="meeting-row"><div><h4>Ratify the appointment of auditors</h4><p>Single choice &middot; scheduled later</p></div><span class="pill">Later</span></div>
-            <div class="meeting-row"><div><h4>Adopt the amended bylaws</h4><p>Single choice &middot; scheduled later</p></div><span class="pill">Later</span></div>
-            <div class="admin-status" id="vote-admin-status" aria-live="polite">The vote is closed and waiting for the host.</div>
-            <p class="result-note">This single-member example shows sample totals after you close the vote. It does not demonstrate real ballot privacy.</p>
-            <div class="result-summary" id="vote-results" hidden aria-live="polite"><div><span>Yes</span><strong id="yes-count">0</strong></div><div><span>No</span><strong id="no-count">0</strong></div><div><span>Abstain</span><strong id="abstain-count">0</strong></div></div>
-          </div></details></div>
-</section>
-
-        <section class="demo-panel" id="qa-panel" role="tabpanel" aria-labelledby="qa-tab" hidden>
-<div class="member-side">
-            <div class="phone" aria-label="Member Q&A view">
-              <div class="phone-top"><strong>dotsconnect.live</strong><span>Q&amp;A</span></div>
-              <div class="phone-body">
-                <h4>Ask a question</h4><p>Questions are reviewed by the meeting host.</p>
-                <span class="phone-status" id="qa-member-state">Waiting for the host</span>
-                <label class="field-label" for="qa-input">Your sample question</label>
-                <textarea class="member-textarea" id="qa-input" maxlength="180" placeholder="What would you like to ask?" disabled></textarea>
-                <button class="member-submit" type="button" id="qa-submit" disabled>Submit question</button>
-                <p class="member-confirmation" id="qa-confirmation" role="status" tabindex="-1" hidden>Your question is waiting for review.</p>
-                <div class="member-nav"><span>Agenda</span><span>Vote</span><span class="is-active">Q&amp;A</span></div>
-              </div>
-            </div>
-          </div>
-<div class="member-guide"><h3>Ask a sample question.</h3><p>Submit a question, then use the organizer controls to approve it for the presenter.</p><details class="host"><summary>Explore organizer controls (optional)</summary><div class="host-content">
-            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
-            <div class="console-title"><h3>Moderated Q&amp;A</h3><p>Open questions when the floor is ready for members.</p></div>
-            <button class="action" type="button" id="qa-toggle">Open Q&amp;A</button>
-            <div class="admin-status" id="qa-admin-status" aria-live="polite">Q&amp;A is closed and waiting for the host.</div>
-            <ul class="question-list" id="qa-list"><li class="empty" id="qa-empty">No member questions have been submitted.</li></ul>
-          </div></details></div>
-</section>
-
-        <section class="demo-panel" id="queue-panel" role="tabpanel" aria-labelledby="queue-tab" hidden>
-<div class="member-side">
-            <div class="phone" aria-label="Member speaking queue view">
-              <div class="phone-top"><strong>dotsconnect.live</strong><span>Queue</span></div>
-              <div class="phone-body">
-                <h4>Join the speaker queue</h4><p>Raise your hand when the floor is open.</p>
-                <span class="phone-status" id="queue-member-state">Waiting for the host</span>
-                <button class="raise-hand" type="button" id="raise-hand" disabled>Raise hand</button>
-                <div class="member-list"><div><span>Current speaker</span><strong id="current-speaker">-</strong></div><div><span>Your place</span><strong id="queue-position">-</strong></div></div>
-                <p class="member-confirmation" id="queue-confirmation" role="status" tabindex="-1" hidden>You are in the speaker queue.</p>
-                <div class="member-nav"><span>Agenda</span><span>Vote</span><span class="is-active">Queue</span></div>
-              </div>
-            </div>
-          </div>
-<div class="member-guide"><h3>Request the floor.</h3><p>Raise your hand, then open the organizer controls and call the next speaker.</p><details class="host"><summary>Explore organizer controls (optional)</summary><div class="host-content">
-            <div class="surface-label"><strong>Host console</strong><span class="live-dot">Meeting in session</span></div>
-            <div class="console-title"><h3>Speaker queue</h3><p>Open the floor and bring members into the conversation in order.</p></div>
-            <button class="action" type="button" id="queue-toggle">Open the floor</button>
-            <div class="admin-status" id="queue-admin-status" aria-live="polite">The floor is closed and waiting for the host.</div>
-            <ol class="queue-list" id="queue-list"><li id="queue-empty"><span>No one is waiting to speak.</span></li><li id="queue-member" hidden><strong>Member 1</strong><span>1</span></li></ol><button class="action" id="call-speaker" type="button" disabled>Call next speaker</button>
-          </div></details></div>
-</section>
+        </div>
       </div>
-      <p class="tour-disclaimer">For illustration only. Sample ballots and questions stay in this browser tab. Reset or reload the page to clear them.</p>
-      <noscript><p>This interactive example needs JavaScript. <a href="/talk-to-dots">Contact DOTS for a guided demo.</a></p></noscript>
-      <button class="tour-reset" id="tour-reset" type="button">Reset interactive tour</button>
-      <p class="tour-contact"><a href="/talk-to-dots">Discuss your event with DOTS →</a></p>
+      <div class="demo-caption"><p>Interactive sample based on the v3 member screens. Your entries stay in this tab and clear when you reset or reload.</p><a href="/talk-to-dots">Talk about your event →</a></div>
     </section>
-
-
   </main>
-
   <footer class="site-footer">
     <div class="wrap">
-      <div class="footer-grid">
-        <div class="footer-brand"><a class="brand" href="/">DOTS<span class="dot">.</span></a><p>Electronic voting and meeting support.</p></div>
-        <div class="footer-col"><h3>Product</h3><ul><li><a href="/electronic-voting">Electronic Voting</a></li><li><a href="/meetings-and-votes">Meetings &amp; Events</a></li><li><a href="/demo" aria-current="page">Try the demo</a></li></ul></div>
-        <div class="footer-col"><h3>Contact</h3><ul><li><a href="/talk-to-dots">Talk to DOTS</a></li><li><a href="tel:18333687123">1.833.368.7123</a></li><li><a href="mailto:sales@dataonthespot.com">sales@dataonthespot.com</a></li></ul></div>
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <a class="corporate-logo" href="/" aria-label="Data on the Spot"><img src="/dots-logo-full.png" alt="Data on the Spot"></a>
+          <p>Electronic voting and meeting support.</p>
+        </div>
+        <div class="foot-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="/electronic-voting">Electronic Voting</a></li>
+            <li><a href="/meetings-and-votes">Meetings &amp; Events</a></li>
+            <li><a href="/demo">Try the demo</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/about">About DOTS</a></li>
+            <li><a href="/talk-to-dots">Talk to DOTS</a></li>
+          </ul>
+        </div>
+        <div class="foot-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:18333687123">1.833.368.7123</a></li>
+            <li><a href="mailto:sales@dataonthespot.com">sales@dataonthespot.com</a></li>
+            <li>65 Overlea Blvd, East York, ON</li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-bottom"><span>Copyright 2026 Data On The Spot Inc.</span></div>
+      <div class="foot-bottom">
+        <span>© 2026 Data On The Spot Inc. All rights reserved.</span>
+
+      </div>
     </div>
   </footer>
 
-
-  <script>
-    (function () {
-      function track(eventName) {
-        if (typeof window.plausible === 'function') window.plausible(eventName);
-      }
-      document.addEventListener('click', function (event) {
-        var link = event.target.closest('a[href]');
-        if (!link) return;
-        var href = link.getAttribute('href').split(/[?#]/)[0];
-        if (href === '/talk-to-dots') track('Talk to DOTS');
-        else if (href === '/demo') track('Try the demo');
-        else if (href.indexOf('tel:') === 0) track('Phone Click');
-        else if (href.indexOf('mailto:') === 0) track('Email Click');
-      });
-    })();
-  </script>
 </body>
 </html>
