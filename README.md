@@ -15,9 +15,9 @@ The shortened site gives each page one purpose: introduction and customer proof 
 The demo follows the DOTS Connect v3 member layout, with rounded module tabs at the top on desktop and the bottom on smaller screens:
 
 - Member homepage and an event workspace.
-- Vote: select, review, edit answers, cast, and confirmation; duplicate submissions blocked.
+- Vote: select, review, edit answers, cast, and confirmation; duplicate submissions blocked. A separate member example shows the current amendment, proposed wording changes, and order of business; it explains that passing an amendment does not pass the main resolution.
 - Q&A: submit one sample question, inspect your questions and pinned answers, and expand an example response. No automatic or real moderator response is simulated.
-- Queue: request to speak, see position, and leave the queue.
+- Queue: Raise my hand, answer the debate-side prompt, Send request, see position, and leave the queue.
 - Agenda and Docs: browse a sample schedule and open an inline sample agenda.
 - Keyboard tab navigation, visible focus, status announcements, and full reset.
 
@@ -32,10 +32,15 @@ All `v3-member-*.png` assets are original member screenshots extracted without r
 | `v3-member-home.png` | DOTSConnect-Member-View-Companion-v1.1.pdf, page 3 |
 | `v3-member-agenda.png` | Same guide, page 5 |
 | `v3-member-documents.png` | Same guide, page 6 |
-| `v3-member-ballot.png` | Same guide, page 20 |
-| `v3-member-questions.png` | DOTS-Connect-QA-Before-a-Strike-or-Ratification-Vote-v5.pdf, page 1 |
+| `v3-member-ballot.png` | DOTS-Connect-QA-Before-the-AGM-v4.pdf, page 4; clean amendment ballot |
+| `v3-member-questions.png` | DOTS-Connect-QA-Before-a-Strike-or-Ratification-Vote-v5.pdf, page 1; earlier reference retained |
+| `v3-member-questions-desktop.png` | DOTS-Connect-QA-Guide (1).pdf, page 1; clean cover screenshot |
+| `v3-member-queue-desktop.png`, `v3-member-queue-mobile.png` | DOTS-Connect-Speaker-Queue-Guide.pdf, page 1; clean cover screenshots |
+| `v3-member-resolutions-desktop.png`, `v3-member-resolutions-mobile.png` | DOTS-Connect-Resolutions-Guide.pdf, page 1; clean cover screenshots |
 
-The member companion is explicitly labeled DOTS Connect v3, 15 September 2026, demo/test data. The Q&A guide likewise identifies its screenshots as demonstration content. The ballot description was already redacted in the source. Test names and dates are retained; these are not live members or results. Product screenshots replace the older mockups on Home, Electronic Voting, and Meetings & Events, and the demo links to original v3 screens. Social preview images use the actual member homepage. Corporate/customer logos and the About event photograph are retained.
+The latest imagery uses the clean, unhighlighted desktop and mobile captures from the member guides supplied by JP. The older redacted ballot screenshot has been replaced with the clean amendment ballot from the AGM guide. Screens show demonstration events and resolutions; these are not live votes or results. No screenshot has been retouched. Source images remain available at full size through visible links.
+
+Home uses the full member event with Q&A; Voting uses the mobile resolution view; Meetings uses the mobile speaker queue and desktop resolution view. Social previews use the current desktop Q&A screenshot. The interactive demo follows the newer Vote-first navigation, neutral ballot choices, Q&A wording, and two-step queue request. Corporate/customer logos and the About event photograph are retained.
 
 ## Validation and remaining review
 

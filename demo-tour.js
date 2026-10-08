@@ -6,15 +6,16 @@
     const tabs = [...document.querySelectorAll(selector)];
     const select = (name, focus = false) => {
       tabs.forEach(tab => {
-        const active = tab.dataset.tab === name || tab.dataset.qaTab === name;
+        const active = tab.dataset.tab === name || tab.dataset.qaTab === name || tab.dataset.example === name;
         tab.setAttribute('aria-selected', String(active));
         tab.tabIndex = active ? 0 : -1;
         byId(tab.getAttribute('aria-controls')).hidden = !active;
         if (active && focus) tab.focus();
       });
+      if (tabs[0]?.dataset.example) byId('ballot-screen-reference').hidden = name !== 'ballot';
     };
     tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => select(tab.dataset.tab || tab.dataset.qaTab));
+      tab.addEventListener('click', () => select(tab.dataset.tab || tab.dataset.qaTab || tab.dataset.example));
       tab.addEventListener('keydown', event => {
         let next;
         if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
@@ -23,7 +24,7 @@
         if (event.key === 'End') next = tabs.length - 1;
         if (next !== undefined) {
           event.preventDefault();
-          select(tabs[next].dataset.tab || tabs[next].dataset.qaTab, true);
+          select(tabs[next].dataset.tab || tabs[next].dataset.qaTab || tabs[next].dataset.example, true);
         }
       });
     });
@@ -31,6 +32,7 @@
   }
   const selectTool = tabGroup('[data-tab]');
   const selectQuestions = tabGroup('[data-qa-tab]');
+  const selectExample = tabGroup('[data-example]');
   const choices = [...document.querySelectorAll('.vote-choice')];
   const labels = { yes: 'In favour', no: 'Opposed', abstain: 'Abstain' };
   let selection = null, voteStep = 'select', questionSent = false, queued = false;
@@ -94,19 +96,39 @@
     track('Demo Question Submitted');
   });
   function renderQueue() {
-    byId('queue-status').textContent = queued ? 'You are number 1 in the queue. Wait for the chair to call you.' : 'The queue is open for speaker requests.';
+    byId('queue-status').textContent = queued ? 'You’re in the queue. Your sample request is approved; you are number 1.' : 'The queue is open for speaker requests.';
     byId('raise-hand').hidden = queued;
     byId('leave-queue').hidden = !queued;
     byId('queue-empty').hidden = queued;
     byId('speaker-order').hidden = !queued;
   }
+  function closeRequest() {
+    byId('queue-request').hidden = true;
+    byId('raise-hand').setAttribute('aria-expanded', 'false');
+  }
   byId('raise-hand').addEventListener('click', () => {
     if (queued) return;
-    queued = true; renderQueue(); byId('leave-queue').focus();
+    byId('queue-request').hidden = false;
+    byId('raise-hand').hidden = true;
+    byId('raise-hand').setAttribute('aria-expanded', 'true');
+    byId('queue-side').focus();
+  });
+  byId('queue-side').addEventListener('change', () => { byId('send-request').disabled = !byId('queue-side').value; });
+  byId('cancel-request').addEventListener('click', () => {
+    closeRequest(); renderQueue(); byId('raise-hand').focus();
+  });
+  byId('queue-request').addEventListener('submit', event => {
+    event.preventDefault();
+    if (queued || !['In favour', 'Opposed'].includes(byId('queue-side').value)) return;
+    queued = true;
+    byId('speaker-side').textContent = byId('queue-side').value;
+    closeRequest(); renderQueue(); byId('leave-queue').focus();
     track('Demo Speaker Queue Joined');
   });
   byId('leave-queue').addEventListener('click', () => {
-    queued = false; renderQueue(); byId('raise-hand').focus();
+    queued = false; byId('speaker-side').textContent = '';
+    byId('queue-side').selectedIndex = 0; byId('send-request').disabled = true;
+    renderQueue(); byId('raise-hand').focus();
   });
   byId('member-home').addEventListener('click', () => {
     byId('event-workspace').hidden = true; byId('member-portal').hidden = false; byId('portal-title').focus();
@@ -127,6 +149,9 @@
     byId('qa-new-question').hidden = true; byId('qa-start').disabled = false;
     byId('qa-start').textContent = '＋ Ask a question'; byId('qa-submit').disabled = true;
     byId('sample-document').hidden = true;
+    byId('queue-side').selectedIndex = 0; byId('send-request').disabled = true;
+    byId('speaker-side').textContent = ''; closeRequest();
+    selectExample('ballot'); byId('ballot-screen-reference').hidden = false;
     document.querySelectorAll('.member-app details').forEach(details => { details.open = false; });
     byId('member-portal').hidden = true; byId('event-workspace').hidden = false;
     closeQuestion(); renderVote(); renderQueue(); selectQuestions('your'); selectTool('voting', true);
